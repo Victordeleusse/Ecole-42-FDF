@@ -12,6 +12,8 @@ CC = gcc
 %.o: %.c fdf.h
 			${CC} -I. ${MINILIB_PATH_MACOS} ${MINILIB_PATH} ${LIBFT_PATH} -MMD -c $< -o ${<:.c=.o}
 
+### si la compilation echoue -> enlever le PATH_MACOS et compiler macos avec les SRCS directement
+
 macos: 	${OBJS}
 		$(MAKE) -C minilibx_macos/ all
 		$(MAKE) -C Libft_fdf/ all

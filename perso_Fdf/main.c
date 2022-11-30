@@ -6,29 +6,54 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/11/30 13:11:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:59:23 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-typedef struct    data_s
+#define bites_per_pixel 100
+
+void    ft_mlx_put_pixel(t_data img, int x, int y, int color)
 {
-    void          *mlx_ptr;
-    void          *mlx_win;
-}                 data_t;
+    int     offset;
+    char    *pixel_address;
+
+    offset = (x * (img.bits_per_pixel/8) + y * img.line_length);
+    pixel_address = img.address + offset;
+    *(int *)pixel_address = color;
+}
 
 int main(void)
 {
-    data_t        data;
+    void    *mlx;
+    void    *mlx_window;
+    t_data  img;
+    int     i;
+    int     j;
 
-    ft_putchar('a');
-	ft_putchar('\n');
-	ft_putchar('\n');
-	if ((data.mlx_ptr = mlx_init()) == NULL)
-        return (EXIT_FAILURE);
-    if ((data.mlx_win = mlx_new_window(data.mlx_ptr, 640, 480, "Hello world")) == NULL)
-        return (EXIT_FAILURE);
-    mlx_loop(data.mlx_ptr);
-    return (EXIT_SUCCESS);
+    // img.bits_per_pixel = 4;
+    // img.line_length = 400;
+    i = 0;
+    j = 0;
+    mlx = mlx_init();
+    mlx_window = mlx_new_window(mlx, 500, 500, "First");
+    img.image = mlx_new_image(mlx, 1000, 1000);
+    img.address = mlx_get_data_addr(img.image, &img.bits_per_pixel, &img.line_length, &img.endian);
+    while (j < 100)
+    {    
+        ft_mlx_put_pixel(img, 100 - 3 * (i * i, j, RED));
+        ft_mlx_put_pixel(img, 100 + i, j, RED);
+        i++;
+        j++;
+    }
+    while (j < 200)
+    {    
+        ft_mlx_put_pixel(img, 100 - i, j, BLUE);
+        ft_mlx_put_pixel(img, 100 + i, j, BLUE);
+        i--;
+        j++;
+    }
+    mlx_put_image_to_window(mlx, mlx_window, img.image, 150, 100);
+    mlx_loop(mlx);
 }
