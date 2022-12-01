@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 10:41:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/11/30 10:25:56 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:45:49 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*get_next_line(int fd)
 {
 	static t_fdlist	*fd_liste;
 	t_fdlist		*fd_element;
-	t_list_gnl			*liste;
+	t_list_gnl		*liste;
 	char			*resultat;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

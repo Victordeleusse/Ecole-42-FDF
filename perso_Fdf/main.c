@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/01 10:45:47 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/01 12:17:36 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_window;
 	t_data	img;
-	int	 i;
+	int		i;
 	int		j;
 
 	i = 0;
@@ -52,4 +52,11 @@ int	main(void)
 	}
 	mlx_put_image_to_window(mlx, mlx_window, img.image, 150, 100);
 	mlx_loop(mlx);
+	return (0);
 }
+
+// int	main(void)
+// {
+// 	ft_draw();
+// 	return (0);
+// }
