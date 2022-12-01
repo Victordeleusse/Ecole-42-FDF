@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/11/30 15:27:10 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:33:09 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct	s_data
 # define YELLOW 0xffff00
 # define ORANGE 0xFF6600
 # define PURPLE 0x6600FF
+
+typedef struct s_color_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}t_color_rgb;
 
 # ifndef bites_per_pixel
 # 	define bites_per_pixel 8

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/11/30 16:59:23 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:15:05 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int main(void)
     img.address = mlx_get_data_addr(img.image, &img.bits_per_pixel, &img.line_length, &img.endian);
     while (j < 100)
     {    
-        ft_mlx_put_pixel(img, 100 - 3 * (i * i, j, RED));
-        ft_mlx_put_pixel(img, 100 + i, j, RED);
+        ft_mlx_put_pixel(img, 100 - i, j, 0x00ff00);
+        ft_mlx_put_pixel(img, 100 + i, j, 0x00ff00);
         i++;
         j++;
     }
