@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/11/30 19:33:09 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:43:04 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,31 @@
 # include <stdio.h>
 # include <string.h>
 
+///////////////////////////////////// FUNCTIONS /////////////////////////////////////
+
+int		ft_new_color(int color, int blue, int green, int red);
+
+void	ft_mlx_put_pixel(t_data img, int x, int y, int color);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////// STRUCTURES /////////////////////////////////////
 
 
-typedef struct	s_data 
+typedef struct s_data
 {
 	void	*image;
 	char	*address;
@@ -52,9 +73,5 @@ typedef struct s_color_rgb
 	int	g;
 	int	b;
 }t_color_rgb;
-
-# ifndef bites_per_pixel
-# 	define bites_per_pixel 8
-# endif
 
 #endif
