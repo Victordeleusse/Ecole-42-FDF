@@ -6,13 +6,12 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/01 18:59:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:12:07 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-
 
 ////////////////////////////////// LIBRARIES //////////////////////////////////
 
@@ -22,6 +21,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+
+# ifndef Z
+#  define Z 5
+# endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
 
@@ -40,13 +43,13 @@ typedef struct s_map
 {
 	char	*name;
 	size_t	height;
-	size_t	length;
+	size_t	width;
 	int		**map_int;
 }t_map;
 
-t_map	ft_init_map(char *nom);
-int		*ft_line_int(char *str, size_t length);
-t_map	ft_generate_map(char *nom);
+t_map	*ft_init_map(char *nom);
+int		*ft_line_int(char *str, size_t width);
+t_map	*ft_generate_map(char *nom);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
@@ -57,10 +60,12 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	t_map	map;
+	t_map	*map;
 }t_data;
 
-void	ft_mlx_put_pixel(t_data img, int x, int y, int color);
+void	ft_mlx_put_pixel(t_data *img, int x, int y, int color);
+t_data	*ft_init_data(char *map_name, void *mlx);
+void	ft_draw(t_data *img, void *mlx, void *window);
 
 ////////////////////////////////// COLORS /////////////////////////////////////
 

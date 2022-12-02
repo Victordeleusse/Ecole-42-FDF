@@ -1,4 +1,4 @@
-SRCS = main.c
+SRCS = main.c map.c
 
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}
