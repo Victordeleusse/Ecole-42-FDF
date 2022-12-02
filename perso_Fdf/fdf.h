@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/02 12:12:07 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:26:46 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@
 # include <stdio.h>
 # include <string.h>
 
-# ifndef Z
-#  define Z 5
+# ifndef ZOOM
+#  define ZOOM 25
+# endif
+
+# ifndef COLOR_MIN
+#  define COLOR_MIN 0x000077
+# endif
+
+# ifndef COLOR_MAX
+#  define COLOR_MAX 0x770000
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -35,9 +43,11 @@ typedef struct s_color_rgb
 	int	b;
 }t_color_rgb;
 
-int		ft_new_color(int color, int blue, int green, int red);
+t_color_rgb	ft_get_rgb(int color);
 
 ////////////////////////////////// MAP.C ///////////////////////////////////
+
+// map[j][i] avec j = height et i = width
 
 typedef struct s_map
 {
@@ -47,9 +57,14 @@ typedef struct s_map
 	int		**map_int;
 }t_map;
 
-t_map	*ft_init_map(char *nom);
-int		*ft_line_int(char *str, size_t width);
-t_map	*ft_generate_map(char *nom);
+t_map		*ft_init_map(char *nom);
+int			*ft_line_int(char *str, size_t width);
+t_map		*ft_generate_map(char *nom);
+
+//////////////////////////////// PIXEL_COLOR.C /////////////////////////////////
+
+int			ft_max_map(t_map *map);
+int			ft_min_map(t_map *map);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
@@ -63,9 +78,9 @@ typedef struct s_data
 	t_map	*map;
 }t_data;
 
-void	ft_mlx_put_pixel(t_data *img, int x, int y, int color);
-t_data	*ft_init_data(char *map_name, void *mlx);
-void	ft_draw(t_data *img, void *mlx, void *window);
+void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
+t_data		*ft_init_data(char *map_name, void *mlx);
+void		ft_draw(t_data *img, void *mlx, void *window);
 
 ////////////////////////////////// COLORS /////////////////////////////////////
 

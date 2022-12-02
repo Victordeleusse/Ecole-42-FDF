@@ -1,4 +1,4 @@
-SRCS = main.c map.c
+SRCS = main.c map.c color.c pixel_color.c
 
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}

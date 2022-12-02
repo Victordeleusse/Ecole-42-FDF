@@ -6,20 +6,18 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:16:07 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/01 11:56:04 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:31:08 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-/*	
 //	RGB transformation : the idea is to be able to change color by adding more
 // 	of blue, more of red or more of green to our color. 
 //	
-//	Colors came from 0 to 255 (FF equivalent in hexadecimal) -> fit in an int as int 
-//	is 4 bytes - also fit with unsigned char (each byte contains 2^8 = 256 values) when
-//	a char comes from -128 to 127, an unsigned char comes from 0 to 255.
+//	Colors came from 0 to 255 (FF equivalent in hexadecimal) -> fit in an int
+//  as int is 4 bytes - also fit with unsigned char (each byte contains 
+//  2^8 = 256 values) when a char comes from -128 to 127, an unsigned char 
+//  comes from 0 to 255.
 //	
-*/
 
 #include "fdf.h"
 
@@ -103,20 +101,33 @@ static int	ft_get_red(char *color_hex)
 	return (green);
 }
 
-int	ft_new_color(int color, int blue, int green, int red)
+t_color_rgb	ft_get_rgb(int color)
 {
-	t_color_rgb	color_rgb;
-	int			new_color;
 	char		*color_hex;
+	t_color_rgb	rgb;
 
 	color_hex = ft_putbase_hex(color);
-	color_rgb.b = ft_get_blue(color_hex);
-	color_rgb.g = ft_get_green(color_hex);
-	color_rgb.r = ft_get_red(color_hex);
+	rgb.b = ft_get_blue(color_hex);
+	rgb.g = ft_get_green(color_hex);
+	rgb.r = ft_get_red(color_hex);
 	free(color_hex);
-	color_rgb.b = color_rgb.b + blue;
-	color_rgb.g = color_rgb.g + green;
-	color_rgb.r = color_rgb.r + red;
-	new_color = color_rgb.b + color_rgb.g * 256 + color_rgb.r * 256 * 256;
-	return (new_color);
+	return (rgb);
 }
+
+// int	ft_new_color(int color, int blue, int green, int red)
+// {
+// 	t_color_rgb	color_rgb;
+// 	int			new_color;
+// 	char		*color_hex;
+
+// 	color_hex = ft_putbase_hex(color);
+// 	color_rgb.b = ft_get_blue(color_hex);
+// 	color_rgb.g = ft_get_green(color_hex);
+// 	color_rgb.r = ft_get_red(color_hex);
+// 	free(color_hex);
+// 	color_rgb.b = color_rgb.b + blue;
+// 	color_rgb.g = color_rgb.g + green;
+// 	color_rgb.r = color_rgb.r + red;
+// 	new_color = color_rgb.b + color_rgb.g * 256 + color_rgb.r * 256 * 256;
+// 	return (new_color);
+// }
