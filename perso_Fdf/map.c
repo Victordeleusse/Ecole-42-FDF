@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:25:53 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/01 17:43:02 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/01 19:05:06 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int	*ft_line_int(char *str, size_t length)
 	return (line);
 }
 
-void	ft_generate_map_int(t_map map)
+t_map	ft_generate_map(char *map_name)
 {
 	size_t	i;
 	int		fd;
 	char	*str;
+	t_map	map;
 
+	map = ft_init_map(map_name);
 	i = 0;
 	fd = open(map.name, O_RDONLY);
 	while (i < map.height)
@@ -68,19 +70,18 @@ void	ft_generate_map_int(t_map map)
 		map.map_int[i] = ft_line_int(str, map.length);
 		i++;
 	}
+	return (map);
 }
 
 int	main(void)
 {
 	char	mape_name[] = "test_map.txt";
-	t_map	map;
 	size_t	i;
-	size_t	j;
+	size_t	j;	
+	t_map	map;
 
 	i = 0;
-	map = ft_init_map(mape_name);
-	printf("longueur de la map : %ld\n\n\n", map.length);
-	ft_generate_map_int(map);
+	map = ft_generate_map(mape_name);
 	while (i < map.height)
 	{
 		j = 0;

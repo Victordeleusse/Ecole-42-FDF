@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/01 16:10:21 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:59:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef struct s_color_rgb
 
 int		ft_new_color(int color, int blue, int green, int red);
 
-
-////////////////////////////////// MAIN.C ///////////////////////////////////
+////////////////////////////////// MAP.C ///////////////////////////////////
 
 typedef struct s_map
 {
@@ -45,18 +44,23 @@ typedef struct s_map
 	int		**map_int;
 }t_map;
 
+t_map	ft_init_map(char *nom);
+int		*ft_line_int(char *str, size_t length);
+t_map	ft_generate_map(char *nom);
+
+////////////////////////////////// MAIN.C ///////////////////////////////////
+
 typedef struct s_data
 {
 	void	*image;
 	char	*address;
 	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
 	t_map	map;
 }t_data;
 
-
 void	ft_mlx_put_pixel(t_data img, int x, int y, int color);
-void	ft_draw(void);
 
 ////////////////////////////////// COLORS /////////////////////////////////////
 
