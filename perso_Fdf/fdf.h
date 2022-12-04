@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 14:14:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:33:29 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_map		*ft_generate_map(char *nom);
 
 int			ft_max_map(t_map *map);
 int			ft_min_map(t_map *map);
-int			ft_new_color(int color, int diff);
+int			ft_new_color(int color_diff);
 int			ft_color_pixel(t_map *map, int i, int j);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////

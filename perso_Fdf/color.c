@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:16:07 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/02 15:31:08 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:51:00 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	ft_get_blue(char *color_hex)
 		i++;
 	while (base[j] != color_hex[6])
 		j++;
-	printf(" %ld %ld \n", i , j);
 	blue = j * 16 + i;
 	return (blue);
 }
@@ -77,7 +76,6 @@ static int	ft_get_green(char *color_hex)
 		i++;
 	while (base[j] != color_hex[4])
 		j++;
-	printf(" %ld %ld \n", i , j);
 	green = j * 16 + i;
 	return (green);
 }
@@ -96,7 +94,6 @@ static int	ft_get_red(char *color_hex)
 		i++;
 	while (base[j] != color_hex[4])
 		j++;
-	printf(" %ld %ld \n", i , j);
 	green = j * 16 + i;
 	return (green);
 }

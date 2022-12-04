@@ -6,14 +6,11 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:25:53 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 14:10:16 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:43:26 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
 
 size_t	ft_width(char *str)
 {
@@ -59,7 +56,6 @@ t_map	*ft_init_map(char *map_name)
 			map->width = j;
 		++i;
 	}
-	map->width = j;
 	map->map_int = ft_calloc((size_t) sizeof(int *), map->height);
 	return (map);
 }
@@ -99,12 +95,3 @@ t_map	*ft_generate_map(char *map_name)
 	}
 	return (map);
 }
-
-// int	main(void)
-// {
-// 	char	test[] = "a b c d\n";
-// 	size_t	resultat;
-
-// 	resultat = ft_width(test);
-// 	printf("%ld", resultat);
-// }
