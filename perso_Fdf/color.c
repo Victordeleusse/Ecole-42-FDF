@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:16:07 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 14:51:00 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:56:34 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,114 +17,69 @@
 //  as int is 4 bytes - also fit with unsigned char (each byte contains 
 //  2^8 = 256 values) when a char comes from -128 to 127, an unsigned char 
 //  comes from 0 to 255.
+//
+//	Getting the int/RGB conversion
 //	
 
 #include "fdf.h"
 
-static char	*ft_putbase_hex(int color)
+int	ft_get_red(int color)
 {
-	char	*base;
-	size_t	i;
-	char	*color_hex;
+	int	red;
 
-	base = "0123456789ABCDEF";
-	color_hex = (char *)malloc(sizeof(char) * 9);
-	if (!color_hex)
-		return (NULL);
-	color_hex[8] = '\0';
-	i = 7;
-	while (i >= 2)
+	red = 0;
+	while (color >= (256 * 256))
 	{
-		color_hex[i] = base[color % 16];
-		color = color / 16;
-		i--;
+		red++;
+		color -= (256 * 256);
 	}
-	color_hex[0] = '0';
-	color_hex[1] = 'x';
-	return (color_hex);
+	return (red);
 }
 
-static int	ft_get_blue(char *color_hex)
+int	ft_get_green(int color)
 {
-	size_t	i;
-	size_t	j;
-	int		blue;
-	char	*base;
+	int	green;
 
-	base = "0123456789ABCDEF";
-	i = 0;
-	j = 0;
-	while (base[i] != color_hex[7])
-		i++;
-	while (base[j] != color_hex[6])
-		j++;
-	blue = j * 16 + i;
+	green = 0;
+	while (color >= (256 * 256))
+		color -= (256 * 256);
+	while (color >= 256)
+	{
+		green++;
+		color -= 256;
+	}
+	return (green);
+}
+
+int	ft_get_blue(int color)
+{
+	int	blue;
+
+	while (color >= (256 * 256))
+		color -= (256 * 256);
+	while (color >= 256)
+		color -= 256;
+	blue = color;
 	return (blue);
-}
-
-static int	ft_get_green(char *color_hex)
-{
-	size_t	i;
-	size_t	j;
-	int		green;
-	char	*base;
-
-	base = "0123456789ABCDEF";
-	i = 0;
-	j = 0;
-	while (base[i] != color_hex[5])
-		i++;
-	while (base[j] != color_hex[4])
-		j++;
-	green = j * 16 + i;
-	return (green);
-}
-
-static int	ft_get_red(char *color_hex)
-{
-	size_t	i;
-	size_t	j;
-	int		green;
-	char	*base;
-
-	base = "0123456789ABCDEF";
-	i = 0;
-	j = 0;
-	while (base[i] != color_hex[5])
-		i++;
-	while (base[j] != color_hex[4])
-		j++;
-	green = j * 16 + i;
-	return (green);
 }
 
 t_color_rgb	ft_get_rgb(int color)
 {
-	char		*color_hex;
 	t_color_rgb	rgb;
 
-	color_hex = ft_putbase_hex(color);
-	rgb.b = ft_get_blue(color_hex);
-	rgb.g = ft_get_green(color_hex);
-	rgb.r = ft_get_red(color_hex);
-	free(color_hex);
+	rgb.b = ft_get_blue(color);
+	rgb.g = ft_get_green(color);
+	rgb.r = ft_get_red(color);
 	return (rgb);
 }
 
-// int	ft_new_color(int color, int blue, int green, int red)
-// {
-// 	t_color_rgb	color_rgb;
-// 	int			new_color;
-// 	char		*color_hex;
+int	ft_get_int_color(t_color_rgb rgb)
+{
+	int	color;
 
-// 	color_hex = ft_putbase_hex(color);
-// 	color_rgb.b = ft_get_blue(color_hex);
-// 	color_rgb.g = ft_get_green(color_hex);
-// 	color_rgb.r = ft_get_red(color_hex);
-// 	free(color_hex);
-// 	color_rgb.b = color_rgb.b + blue;
-// 	color_rgb.g = color_rgb.g + green;
-// 	color_rgb.r = color_rgb.r + red;
-// 	new_color = color_rgb.b + color_rgb.g * 256 + color_rgb.r * 256 * 256;
-// 	return (new_color);
-// }
+	color = 0;
+	color = color + rgb.b;
+	color = color + 256 * rgb.g;
+	color = color + 256 * 256 * rgb.r;
+	return (color);
+}

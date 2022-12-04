@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 14:33:29 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:09:55 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,21 @@
 # endif
 
 # ifndef COLOR_MIN
-#  define COLOR_MIN 0x00AF00
+#  define COLOR_MIN 0xAAAF00
 # endif
 
 # ifndef COLOR_MAX
-#  define COLOR_MAX 0x00AA00
+#  define COLOR_MAX 0xAADF00
 # endif
+
+////////////////////////////////// EVENTS.C ///////////////////////////////////
+
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+}t_vars;
+
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
 
@@ -43,7 +52,11 @@ typedef struct s_color_rgb
 	int	b;
 }t_color_rgb;
 
+int			ft_get_red(int color);
+int			ft_get_green(int color);
+int			ft_get_blue(int color);
 t_color_rgb	ft_get_rgb(int color);
+int			ft_get_int_color(t_color_rgb rgb);
 
 ////////////////////////////////// MAP.C ///////////////////////////////////
 
@@ -72,6 +85,7 @@ int			ft_color_pixel(t_map *map, int i, int j);
 
 typedef struct s_data
 {
+	void	*mlx;
 	void	*image;
 	char	*address;
 	int		bits_per_pixel;
@@ -81,19 +95,7 @@ typedef struct s_data
 }t_data;
 
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
-t_data		*ft_init_data(char *map_name, void *mlx);
-void		ft_draw(t_data *img, void *mlx, void *window);
-
-////////////////////////////////// COLORS /////////////////////////////////////
-
-# define BLACK 0x000000
-# define WHITE 0xffffff
-# define RED 0xff0000
-# define GREEN 0x00ff00
-# define BLUE 0x0000ff
-# define YELLOW 0xffff00
-# define ORANGE 0xFF6600
-# define PURPLE 0x6600FF
-
+t_data		*ft_init_data(char *map_name);
+void		ft_draw(t_data *img, void *window);
 
 #endif
