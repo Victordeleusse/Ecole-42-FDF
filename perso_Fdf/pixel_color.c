@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:04:41 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/02 16:41:36 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:24:58 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_new_color(int color, int diff)
 	return (new_color);
 }
 
-int	ft_add_color_pixel(t_map *map, int i, int j)
+int	ft_color_pixel(t_map *map, int i, int j)
 {
 	int	min;
 	int	max;
@@ -94,5 +94,5 @@ int	ft_add_color_pixel(t_map *map, int i, int j)
 	min	= ft_min_map(map);
 	color_diff = (COLOR_MAX - COLOR_MIN) / (max - min);
 	color_pixel = COLOR_MIN + (map->map_int[j][i] - min) * color_diff;
-	 
+	return (color_pixel);
 }

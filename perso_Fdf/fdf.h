@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/02 16:26:46 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:14:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@
 # include <string.h>
 
 # ifndef ZOOM
-#  define ZOOM 25
+#  define ZOOM 5
 # endif
 
 # ifndef COLOR_MIN
-#  define COLOR_MIN 0x000077
+#  define COLOR_MIN 0x00AF00
 # endif
 
 # ifndef COLOR_MAX
-#  define COLOR_MAX 0x770000
+#  define COLOR_MAX 0x00AA00
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -65,6 +65,8 @@ t_map		*ft_generate_map(char *nom);
 
 int			ft_max_map(t_map *map);
 int			ft_min_map(t_map *map);
+int			ft_new_color(int color, int diff);
+int			ft_color_pixel(t_map *map, int i, int j);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 

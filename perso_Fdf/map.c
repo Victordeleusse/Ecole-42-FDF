@@ -6,11 +6,33 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:25:53 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/02 11:45:48 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:10:16 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <unistd.h>
+
+size_t	ft_width(char *str)
+{
+	size_t	compteur;
+	size_t	i;
+
+	i = 0;
+	compteur = 0;
+	while (str != NULL && str[i] != '\0' && str[i] != '\n')
+	{
+		while (str[i] == ' ')
+			i++;
+		if (str[i] != '\0' && str[i] != '\n')
+			compteur++;
+		while (str[i] != ' ' && str[i] != '\0' && str[i] != '\n')
+			i++;
+	}
+	return (compteur);
+}
 
 t_map	*ft_init_map(char *map_name)
 {
@@ -23,19 +45,21 @@ t_map	*ft_init_map(char *map_name)
 	map = (t_map *)malloc(sizeof(t_map));
 	map->name = map_name;
 	map->width = 0;
+	map->height = 0;
 	fd = open(map_name, O_RDONLY);
 	while (get_next_line(fd))
 		map->height++;
 	j = 0;
 	i = 0;
 	fd = open(map_name, O_RDONLY);
-	while (i++ < map->height)
+	while (i < map->height)
 	{
-		j = ft_strlen((const char *)get_next_line(fd)) - 1;
+		j = ft_width(get_next_line(fd));
 		if (map->width < j)
 			map->width = j;
+		++i;
 	}
-	map->width = (map->width - 1) / 3 + 1;
+	map->width = j;
 	map->map_int = ft_calloc((size_t) sizeof(int *), map->height);
 	return (map);
 }
@@ -59,42 +83,28 @@ int	*ft_line_int(char *str, size_t width)
 
 t_map	*ft_generate_map(char *map_name)
 {
-	size_t	i;
+	size_t	j;
 	int		fd;
 	char	*str;
 	t_map	*map;
 
 	map = ft_init_map(map_name);
-	i = 0;
+	j = 0;
 	fd = open(map->name, O_RDONLY);
-	while (i < map->height)
+	while (j < map->height)
 	{
 		str = get_next_line(fd);
-		map->map_int[i] = ft_line_int(str, map->width);
-		i++;
+		map->map_int[j] = ft_line_int(str, map->width);
+		j++;
 	}
 	return (map);
 }
 
 // int	main(void)
 // {
-// 	char	mape_name[] = "test_map.txt";
-// 	size_t	i;
-// 	size_t	j;	
-// 	t_map	*map;
+// 	char	test[] = "a b c d\n";
+// 	size_t	resultat;
 
-// 	i = 0;
-// 	map = ft_generate_map(mape_name);
-// 	while (i < map->height)
-// 	{
-// 		j = 0;
-// 		while (j < map->width)
-// 		{	
-// 			printf("%-3d", map->map_int[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
-// 	return (0);
+// 	resultat = ft_width(test);
+// 	printf("%ld", resultat);
 // }

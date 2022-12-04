@@ -7,24 +7,33 @@ MINILIB_PATH_MACOS = -I minilibx_macos -L minilibx_macos -lmlx -framework OpenGL
 MINILIB_PATH_LINUX = -I minilibx-linux -L minilibx-linux -lmlx -lXext -lX11
 LIBFT_PATH = -I Libft_fdf -L Libft_fdf -lft_fdf
 
-CC = gcc
+CC = cc
+CFLAGS += -Wall
+CFLAGS += -Werror
+CFLAGS += -Wextra
+
+ifeq ($(debug), true)
+	CFLAGS += -fsanitize=address,undefined -g2
+endif
 
 %.o: %.c fdf.h
 			${CC} -I. ${MINILIB_PATH_LINUX} ${LIBFT_PATH} -MMD -c $< -o ${<:.c=.o}
 
 ### si la compilation echoue -> enlever le PATH_MACOS et compiler macos avec les SRCS directement
 
+all: linux_run
+
 macos: 	
 		$(MAKE) -C minilibx_macos/ all
 		$(MAKE) -C Libft_fdf/ all
 		clear
-		$(CC) ${SRCS} ${MINILIB_PATH_MACOS} ${LIBFT_PATH} 
+		$(CC) $(CFLAGS) ${SRCS} ${MINILIB_PATH_MACOS} ${LIBFT_PATH} 
 
 linux: ${OBJS}
 		$(MAKE) -C minilibx-linux/ all
 		$(MAKE) -C Libft_fdf/ all
 		clear
-		$(CC) ${OBJS} ${MINILIB_PATH_LINUX} ${LIBFT_PATH} 
+		$(CC) $(CFLAGS) ${OBJS} ${MINILIB_PATH_LINUX} ${LIBFT_PATH} 
 
 macos_run: macos
 			./a.out
