@@ -6,11 +6,13 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/05 17:25:29 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:55:21 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+#include <math.h>
 
 t_vertex	*ft_generate_vertex(t_map *map, size_t j)
 {
@@ -55,4 +57,24 @@ t_vertex	**ft_generate_vertex_map(t_map *map)
 		j++;
 	}
 	return (vtx);
+}
+
+void	ft_rotation(t_data *img)
+{
+	size_t		i;
+	size_t		j;
+
+	j = 0;
+	while (j < img->map->height)
+	{
+		i = 0;
+		while (i < img->map->width)
+		{	
+			img->vertex[j][i].x = (img->vertex[j][i].x * cos(THETA) - img->vertex[j][i].y * sin(THETA)) * cos(-THETA) + img->vertex[j][i].x * sin(THETA) - img->vertex[j][i].y * cos(THETA);
+			img->vertex[j][i].y = (img->vertex[j][i].x * cos(THETA) - img->vertex[j][i].y * sin(THETA)) * sin(-THETA) + img->vertex[j][i].x * sin(THETA) - img->vertex[j][i].y * cos(THETA);
+			i++;
+		}
+		printf("\n");
+		j++;
+	}
 }

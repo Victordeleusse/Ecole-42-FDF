@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/05 18:21:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:45:40 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <string.h>
 
+# include <math.h>
+
 # ifndef ZOOM
 #  define ZOOM 40
 # endif
@@ -32,6 +34,10 @@
 
 # ifndef COLOR_MAX
 #  define COLOR_MAX 0x005000
+# endif
+
+# ifndef THETA
+#  define THETA 30
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
