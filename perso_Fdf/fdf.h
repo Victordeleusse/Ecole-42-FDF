@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/05 17:30:31 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:21:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <string.h>
 
 # ifndef ZOOM
-#  define ZOOM 10
+#  define ZOOM 40
 # endif
 
 # ifndef COLOR_MIN

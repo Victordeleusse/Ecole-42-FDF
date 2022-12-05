@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/05 18:10:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:31:14 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,19 @@ void	ft_draw(t_data *img)
 {
 	int	i;
 	int	j;
-	int	k;
-	int	color_pixel;
 
 	j = 0;
-	while (j < img->map->height * ZOOM)
+	while (j < img->map->height -1)
 	{
 		i = 0;
-		while (i < img->map->width * ZOOM)
+		while (i < img->map->width -1)
 		{
-			k = 0;
-			color_pixel = ft_color_pixel(img->map, i / ZOOM, j / ZOOM);
-			while (k < ZOOM)
-			{	
-				ft_mlx_put_pixel(img, i + k, j, color_pixel);
-				ft_mlx_put_pixel(img, i, j + k, color_pixel);
-				k++;
-			}
-			i = i + ZOOM;
+			ft_draw_line(img, img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, ft_color_pixel(img->map, i, j));
+			ft_draw_line(img, img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, ft_color_pixel(img->map, i, j));
+			i++;
 		}
-		j = j + ZOOM;
+		j++;
 	}
-	ft_draw_line(img, 10, 10, 75, 100, 0xFF0000);
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
 	mlx_loop(img->mlx);
 }
