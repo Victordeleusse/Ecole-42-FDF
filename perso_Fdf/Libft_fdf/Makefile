@@ -11,7 +11,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 				ft_lstmap.c ft_lstnew.c ft_lstsize.c \
 				ft_strlen.c ft_putstr.c ft_putnbr.c ft_putnbr_hexmin.c ft_putnbr_hexmaj.c \
 				ft_putchar.c ft_putadress_hex.c ft_put_unsigned_nbr.c ft_printf.c \
-				get_next_line.c get_next_line_utils.c
+				get_next_line.c get_next_line_utils.c ft_sqrt.c
 
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 18:11:01 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:10:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,53 @@ t_data	*ft_init_data(char *map_name)
 		return (NULL);
 	img->mlx = mlx_init();
 	img->map = ft_generate_map(map_name);
-	while (i < img->map->height)
+	while (j < img->map->height)
 	{
-		j = 0;
-		while (j < img->map->width)
+		i = 0;
+		while (i < img->map->width)
 		{	
-			printf("%-3d", img->map->map_int[i][j]);
-			j++;
+			printf("%-3d", img->map->map_int[j][i]);
+			i++;
 		}
 		printf("\n");
-		i++;
+		j++;
 	}
-	img->image = mlx_new_image(img->mlx, img->map->width * ZOOM, img->map->height * ZOOM);
-	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->image = mlx_new_image(img->mlx, img->map->width * ZOOM, \
+					img->map->height * ZOOM);
+	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
+					&img->line_length, &img->endian);
+	img->window = mlx_new_window(img->mlx, img->map->width + 1500, \
+				img->map->height + 1500, "FdF");
+	img->vertex = ft_generate_vertex_map(img->map);
+	printf("\n\n\n");
+	i = 0;
+	j = 0;
+	while (j < img->map->height)
+	{
+		i = 0;
+		while (i < img->map->width)
+		{	
+			printf("Position dans l espace : x = %d, y = %d, z = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
+			i++;
+		}
+		printf("\n");
+		j++;
+	}
 	return (img);
 }
 
 void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 {
-	int		offset;
-	char	*pixel_address;
+	int			offset;
+	char		*pixel_address;
+	t_color_rgb	rgb;
 
 	offset = (x * (img->bits_per_pixel / 8) + y * img->line_length);
 	pixel_address = img->address + offset;
 	*(int *)pixel_address = color;
 }
 
-void	ft_draw(t_data *img, void *window)
+void	ft_draw(t_data *img)
 {
 	int	i;
 	int	j;
@@ -74,7 +94,8 @@ void	ft_draw(t_data *img, void *window)
 		}
 		j = j + ZOOM;
 	}
-	mlx_put_image_to_window(img->mlx, window, img->image, 0, 0);
+	ft_draw_line(img, 10, 10, 75, 100, 0xFF0000);
+	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
 	mlx_loop(img->mlx);
 }
 
@@ -90,8 +111,7 @@ int	main(void)
 	max = ft_max_map(img->map);
 	printf("min : %d\n", min);
 	printf("max : %d\n", max);
-	mlx_window = mlx_new_window(img->mlx, img->map->width + 1800, img->map->height + 1800, "FdF");
-	ft_draw(img, mlx_window);
+	ft_draw(img);
 	return (0);
 }
 
