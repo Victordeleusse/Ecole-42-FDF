@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 14:33:00 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:06:21 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int			ft_color_pixel(t_map *map, int i, int j);
 
 typedef struct s_vertex
 {
-	int	x;
-	int	y;
-	int	z;
-	int	color;
+	float	x;
+	float	y;
+	float	z;
+	int		color;
 }t_vertex;
 
 t_vertex	*ft_generate_vertex(t_map *map, size_t j);
@@ -115,7 +115,6 @@ void		ft_rotation(t_data *img);
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
 void		ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color);
-
-
+void		ft_draw_line_vertex(t_data *img, t_vertex v1, t_vertex v2, int color);
 
 #endif

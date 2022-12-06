@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 14:23:04 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:57:39 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_draw(t_data *img)
 		}
 		j++;
 	}
+	ft_draw_line_vertex(img, img->vertex[0][0], img->vertex[0][1], 0xFF0000);
 	ft_draw_line(img, -60, 50, 30, 90, 0x00FFFF);
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 400, 150);
 	mlx_loop(img->mlx);

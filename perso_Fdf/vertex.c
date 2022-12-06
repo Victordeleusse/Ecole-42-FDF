@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 14:33:39 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:52:41 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	ft_rotation(t_data *img)
 		i = 0;
 		while (i < img->map->width)
 		{	
-			img->vertex[j][i].x = (img->vertex[j][i].x - img->vertex[j][i].y);
-			img->vertex[j][i].y = 0.4 * (img->vertex[j][i].x + img->vertex[j][i].y);
-			img->vertex[j][i].x = img->vertex[j][i].x +  cos(THETA) * img->vertex[j][i].z;
-			img->vertex[j][i].y = img->vertex[j][i].y - img->vertex[j][i].z * sin(THETA);
+			img->vertex[j][i].x = 0.5 * (img->vertex[j][i].x - img->vertex[j][i].y);
+			img->vertex[j][i].y = 0.25 * (img->vertex[j][i].x + img->vertex[j][i].y);
+			// img->vertex[j][i].x = img->vertex[j][i].x +  cos(THETA) * img->vertex[j][i].z;
+			// img->vertex[j][i].y = img->vertex[j][i].y - img->vertex[j][i].z * sin(THETA);
 			i++;
 		}
 		j++;
