@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 16:57:39 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:09:06 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_data	*ft_init_data(char *map_name)
 		printf("\n");
 		j++;
 	}
-	img->image = mlx_new_image(img->mlx, img->map->width * ZOOM + 300, \
+	img->image = mlx_new_image(img->mlx, img->map->width * ZOOM + 900, \
 					img->map->height * ZOOM + 400);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
@@ -82,14 +82,12 @@ void	ft_draw(t_data *img)
 		i = 0;
 		while (i < img->map->width -1)
 		{
-			ft_draw_line(img, img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, ft_color_pixel(img->map, i, j));
-			ft_draw_line(img, img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, ft_color_pixel(img->map, i, j));
+			ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], ft_color_pixel(img->map, i, j));
+			ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], ft_color_pixel(img->map, i, j));
 			i++;
 		}
 		j++;
 	}
-	ft_draw_line_vertex(img, img->vertex[0][0], img->vertex[0][1], 0xFF0000);
-	ft_draw_line(img, -60, 50, 30, 90, 0x00FFFF);
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 400, 150);
 	mlx_loop(img->mlx);
 }

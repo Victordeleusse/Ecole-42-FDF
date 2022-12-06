@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 17:06:21 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:46:21 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@
 # include <math.h>
 
 # ifndef ZOOM
-#  define ZOOM 30
+#  define ZOOM 50
 # endif
 
 # ifndef COLOR_MIN
-#  define COLOR_MIN 0x005000
+#  define COLOR_MIN 0x7D86FF
 # endif
 
 # ifndef COLOR_MAX
-#  define COLOR_MAX 0x9A5000
+#  define COLOR_MAX 0xB0B6FF
 # endif
 
 # ifndef THETA
-#  define THETA 0.75
+#  define THETA 0.85
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -91,7 +91,6 @@ typedef struct s_vertex
 t_vertex	*ft_generate_vertex(t_map *map, size_t j);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 
-
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
 typedef struct s_data
@@ -114,7 +113,7 @@ void		ft_rotation(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
-void		ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color);
-void		ft_draw_line_vertex(t_data *img, t_vertex v1, t_vertex v2, int color);
+// void		ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color);
+void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int color);
 
 #endif
