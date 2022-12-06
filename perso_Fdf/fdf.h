@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/05 19:45:40 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:33:00 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@
 # include <math.h>
 
 # ifndef ZOOM
-#  define ZOOM 40
+#  define ZOOM 30
 # endif
 
 # ifndef COLOR_MIN
-#  define COLOR_MIN 0x0000AA
+#  define COLOR_MIN 0x005000
 # endif
 
 # ifndef COLOR_MAX
-#  define COLOR_MAX 0x005000
+#  define COLOR_MAX 0x9A5000
 # endif
 
 # ifndef THETA
-#  define THETA 30
+#  define THETA 0.75
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -78,7 +78,7 @@ int			ft_min_map(t_map *map);
 int			ft_new_color(int color_diff);
 int			ft_color_pixel(t_map *map, int i, int j);
 
-////////////////////////////////// vertex.C ///////////////////////////////////
+////////////////////////////////// VERTEX.C ///////////////////////////////////
 
 typedef struct s_vertex
 {
@@ -90,6 +90,7 @@ typedef struct s_vertex
 
 t_vertex	*ft_generate_vertex(t_map *map, size_t j);
 t_vertex	**ft_generate_vertex_map(t_map *map);
+
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
@@ -109,6 +110,7 @@ typedef struct s_data
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
+void		ft_rotation(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 

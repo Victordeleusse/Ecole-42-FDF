@@ -3,8 +3,8 @@ SRCS = main.c map.c color.c pixel_color.c line.c vertex.c
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}
 
-MINILIB_PATH_MACOS = -I minilibx_macos -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
-MINILIB_PATH_LINUX = -I minilibx-linux -L minilibx-linux -lmlx -lXext -lX11
+MINILIB_PATH_MACOS = -I minilibx_macos -L minilibx_macos -lmlx -lm -framework OpenGL -framework AppKit
+MINILIB_PATH_LINUX = -I minilibx-linux -L minilibx-linux -lmlx -lm -lXext -lX11
 LIBFT_PATH = -I Libft_fdf -L Libft_fdf -lft_fdf
 
 CC = cc
