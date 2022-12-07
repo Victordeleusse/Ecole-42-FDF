@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:16:07 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 16:56:34 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:27:56 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 //	
 
 #include "fdf.h"
+// typedef struct s_color_rgb
+// {
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }t_color_rgb;
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <unistd.h>
 
 int	ft_get_red(int color)
 {
@@ -83,3 +93,21 @@ int	ft_get_int_color(t_color_rgb rgb)
 	color = color + 256 * 256 * rgb.r;
 	return (color);
 }
+
+// int	main(void)
+// {
+// 	int			color_test;
+// 	t_color_rgb	rgb;
+
+// 	// color_test = 0xB0B6FF;
+// 	// rgb = ft_get_rgb(color_test);
+// 	// printf("Le b : %d\n", rgb.b);
+// 	// printf("Le g : %d\n", rgb.g);
+// 	// printf("Le r : %d\n", rgb.r);
+// 	rgb.b = 255;
+// 	rgb.g = 182;
+// 	rgb.r = 176;
+// 	color_test = ft_get_int_color(rgb);
+// 	printf("La couleur en int : %d\n", color_test);
+// 	return (0);
+// }

@@ -6,42 +6,32 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 18:48:04 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:47:11 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// void	ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color)
-// {
-// 	float		delta_x;
-// 	float		delta_y;
-// 	int			hypot;
-// 	float		nb_pixels;
+int	ft_color_indice_pixel(t_vertex v1, t_vertex v2, float nb_pixels)
+{
+	int		delta_indice;
+	int		count;
+	size_t	i;
 
-// 	delta_x = (float)(x_f - x_s);
-// 	delta_y = (float)(y_f - y_s);
-// 	hypot = (int)(delta_x * delta_x + delta_y * delta_y);
-// 	nb_pixels = (float)ft_sqrt(hypot);
-// 	delta_x = delta_x / (float)nb_pixels;
-// 	delta_y = delta_y / nb_pixels;
-// 	while (nb_pixels)
-// 	{
-// 		ft_mlx_put_pixel(img, (int)x_s + 200, (int)y_s + 200, color);
-// 		x_s = x_s + delta_x;
-// 		y_s = y_s + delta_y;
-// 		nb_pixels = nb_pixels - 1;
-// 	}
-// }
+	if (!nb_pixels)
+		return (0);
+	delta_indice = *(v2.indice_tab_color) - *(v1.indice_tab_color);
+	count = delta_indice / nb_pixels;
+	return (count);
+}
 
-
-
-void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int color)
+void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 {
 	float		delta_x;
 	float		delta_y;
 	int			hypot;
 	float		nb_pixels;
+	int			color_indice;
 
 	delta_x = (float)(v2.x - v1.x);
 	delta_y = (float)(v2.y - v1.y);
@@ -49,9 +39,15 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int color)
 	nb_pixels = (float)ft_sqrt(hypot);
 	delta_x = delta_x / (float)nb_pixels;
 	delta_y = delta_y / nb_pixels;
+	printf("position : %f, %f || hauteur 1 : %f de couleur : %d\n", v1.x, v1.y, v1.z, v1.color);
+	printf("position : %f, %f || hauteur 2 : %f de couleur : %d\n", v2.x, v2.y, v2.z, v2.color);
+	printf("delta indice : %d\n", *(v2.indice_tab_color) - *(v1.indice_tab_color));
+	color_indice = ft_color_indice_pixel(v1, v2, nb_pixels);
+	// printf("color_indice_pixel : %d\n", color_indice);
 	while (nb_pixels)
 	{
-		ft_mlx_put_pixel(img, (float)v1.x + 400, (float)v1.y + 200, color);
+		*(v1.indice_tab_color) = *(v1.indice_tab_color) + color_indice;
+		ft_mlx_put_pixel(img, (float)v1.x + 400, (float)v1.y + 200, color_tab[*(v1.indice_tab_color)]);
 		v1.x = v1.x + delta_x;
 		v1.y = v1.y + delta_y;
 		nb_pixels = nb_pixels - 1;

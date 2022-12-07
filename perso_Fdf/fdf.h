@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/06 18:46:21 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:29:28 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,19 @@
 # include <math.h>
 
 # ifndef ZOOM
-#  define ZOOM 50
+#  define ZOOM 80
 # endif
 
 # ifndef COLOR_MIN
-#  define COLOR_MIN 0x7D86FF
+#  define COLOR_MIN 0x0000FF
 # endif
 
-# ifndef COLOR_MAX
-#  define COLOR_MAX 0xB0B6FF
+// # ifndef COLOR_MAX
+// #  define COLOR_MAX 0xA0C6FF
+// # endif
+
+# ifndef COLOR_TAB_SIZE
+#  define COLOR_TAB_SIZE 150
 # endif
 
 # ifndef THETA
@@ -76,7 +80,8 @@ t_map		*ft_generate_map(char *nom);
 int			ft_max_map(t_map *map);
 int			ft_min_map(t_map *map);
 int			ft_new_color(int color_diff);
-int			ft_color_pixel(t_map *map, int i, int j);
+int			*ft_generate_color_tab(void);
+int			ft_color_vertex(t_map *map, int hauteur_z, int *color_tab, int *indice_vertex);
 
 ////////////////////////////////// VERTEX.C ///////////////////////////////////
 
@@ -86,9 +91,10 @@ typedef struct s_vertex
 	float	y;
 	float	z;
 	int		color;
+	int		*indice_tab_color;
 }t_vertex;
 
-t_vertex	*ft_generate_vertex(t_map *map, size_t j);
+t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
@@ -114,6 +120,6 @@ void		ft_rotation(t_data *img);
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
 // void		ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color);
-void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int color);
+void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab);
 
 #endif
