@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 11:04:42 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:24:51 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	nb_pixels = (float)ft_sqrt(hypot);
 	delta_x = delta_x / (float)nb_pixels;
 	delta_y = delta_y / nb_pixels;
-	printf("position : %f, %f || hauteur 1 : %f de couleur : %d\n", v1.x, v1.y, v1.z, v1.color);
-	printf("position : %f, %f || hauteur 2 : %f de couleur : %d\n", v2.x, v2.y, v2.z, v2.color);
-	printf("delta indice : %d\n", *(v2.indice_tab_color) - *(v1.indice_tab_color));
+	// printf("position : %f, %f || hauteur 1 : %f de couleur : %d\n", v1.x, v1.y, v1.z, v1.color);
+	// printf("position : %f, %f || hauteur 2 : %f de couleur : %d\n", v2.x, v2.y, v2.z, v2.color);
+	// printf("delta indice : %d\n", *(v2.indice_tab_color) - *(v1.indice_tab_color));
 	color_indice = ft_color_indice_pixel(v1, v2, nb_pixels);
-	printf("color indice : %d\n", *(v2.indice_tab_color) - *(v1.indice_tab_color));
+	// printf("color indice : %d\n", *(v2.indice_tab_color) - *(v1.indice_tab_color));
 	temp_indice_color = (int *)malloc(sizeof(int));
 	*temp_indice_color = *v1.indice_tab_color;
 	while (nb_pixels)

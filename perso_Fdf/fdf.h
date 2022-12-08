@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 12:17:27 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:17:34 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 #  define COLOR_TAB_SIZE 100
 # endif
 
-# ifndef THETA
-#  define THETA 0.35
+# ifndef THETA2
+#  define THETA2 3
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -96,6 +96,7 @@ typedef struct s_vertex
 
 t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
+void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
@@ -115,11 +116,10 @@ typedef struct s_data
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
-void		ft_rotation(t_data *img);
+void		ft_rotation_plane(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
-// void		ft_draw_line(t_data *img, float x_s, float y_s, float x_f, float y_f, int color);
 void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab);
 
 #endif
