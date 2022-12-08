@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/07 18:29:28 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:17:27 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <math.h>
 
 # ifndef ZOOM
-#  define ZOOM 80
+#  define ZOOM 20
 # endif
 
 # ifndef COLOR_MIN
@@ -37,11 +37,11 @@
 // # endif
 
 # ifndef COLOR_TAB_SIZE
-#  define COLOR_TAB_SIZE 150
+#  define COLOR_TAB_SIZE 100
 # endif
 
 # ifndef THETA
-#  define THETA 0.85
+#  define THETA 0.35
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
