@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 15:17:34 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:15:40 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,34 @@
 # include <string.h>
 
 # include <math.h>
+# include <time.h>
 
 # ifndef ZOOM
-#  define ZOOM 20
+#  define ZOOM 120
 # endif
 
 # ifndef COLOR_MIN
 #  define COLOR_MIN 0x0000FF
 # endif
 
-// # ifndef COLOR_MAX
-// #  define COLOR_MAX 0xA0C6FF
-// # endif
+# ifndef PI
+#  define PI 3.1495
+# endif
 
 # ifndef COLOR_TAB_SIZE
 #  define COLOR_TAB_SIZE 100
 # endif
 
+# ifndef THETA_Y
+#  define THETA_Y 45
+# endif
+
+// # ifndef THETA_X
+// #  define THETA_X 50
+// # endif
+
 # ifndef THETA2
-#  define THETA2 3
+#  define THETA2 15
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -117,6 +126,9 @@ void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
 void		ft_rotation_plane(t_data *img);
+void		ft_rotation_axe_y(t_data *img);
+void		ft_rotation_axe_x(t_data *img);
+
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 

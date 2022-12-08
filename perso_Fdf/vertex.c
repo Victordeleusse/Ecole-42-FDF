@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 15:17:16 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:15:14 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab)
 		return (NULL);
 	while (i < map->width)
 	{
-		v[i].x = i * ZOOM;
-		v[i].y = j * ZOOM;
+		v[i].x = i * ZOOM + 9 * ZOOM;
+		v[i].y = j * ZOOM + 9 * ZOOM;
 		// printf("coordonnees du point : x-> %f, y-> %f\n", v[i].x, v[i].y);
 		v[i].z = map->map_int[j][i];
 		v[i].indice_tab_color = ft_calloc((size_t) sizeof(int), (size_t) 1);
@@ -93,9 +93,7 @@ void	ft_rotation_plane(t_data *img)
 	size_t		i;
 	size_t		j;
 	float		k;
-	// t_vertex	*vertex_temp;
 
-	// vertex_temp = (t_vertex *)malloc
 	j = 0;
 	while (j < img->map->height)
 	{
@@ -103,15 +101,53 @@ void	ft_rotation_plane(t_data *img)
 		k = 0;
 		while (i < img->map->width)
 		{	
-			// img->vertex[j][i].x = 0.5 * (img->vertex[j][i].x - img->vertex[j][i].y);
-			// img->vertex[j][i].y = 0.25 * (img->vertex[j][i].x + img->vertex[j][i].y);
-			// img->vertex[j][i].y = 0.25 * (img->vertex[j][i].x + img->vertex[j][i].y - 2 * img->vertex[j][i].z);
-			// img->vertex[j][i].z = 0.35 * (img->vertex[j][i].x + img->vertex[j][i].y + img->vertex[j][i].z);
 			k = img->vertex[j][i].x;
-			img->vertex[j][i].x = img->vertex[j][i].x * cos(THETA2) - img->vertex[j][i].y * sin(THETA2);
-			img->vertex[j][i].y = k * sin(THETA2) + img->vertex[j][i].y * cos(THETA2);
+			img->vertex[j][i].x = img->vertex[j][i].x * cos(THETA2 / 57.2958) - img->vertex[j][i].y * sin(THETA2 / 57.2958);
+			img->vertex[j][i].y = k * sin(THETA2 / 57.2958) + img->vertex[j][i].y * cos(THETA2 / 57.2958);
 			i++;
 		}
 		j++;
 	}
 }
+
+void	ft_rotation_axe_y(t_data *img)
+{
+	size_t		i;
+	size_t		j;
+	float		k;
+
+	j = 0;
+	while (j < img->map->height)
+	{
+		i = 0;
+		k = 0;
+		while (i < img->map->width)
+		{	
+			k = img->vertex[j][i].y;
+			img->vertex[j][i].y = img->vertex[j][i].z * -cos(THETA_Y / 57.2958) + img->vertex[j][i].y * sin(THETA_Y / 57.2958);
+			i++;
+		}
+		j++;
+	}
+}
+
+// void	ft_rotation_axe_x(t_data *img)
+// {
+// 	size_t		i;
+// 	size_t		j;
+// 	float		k;
+
+// 	j = 0;
+// 	while (j < img->map->height)
+// 	{
+// 		i = 0;
+// 		k = 0;
+// 		while (i < img->map->width)
+// 		{	
+// 			k = img->vertex[j][i].x;
+// 			img->vertex[j][i].x = img->vertex[j][i].y * -cos(THETA_X / 57.2958) + img->vertex[j][i].x * sin(THETA_X / 57.2958);
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// }
