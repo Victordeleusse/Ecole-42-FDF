@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/09 12:05:07 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:34:06 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_data	*ft_init_data(char *map_name)
 	if (!img)
 		return (NULL);
 	img->mlx = mlx_init();
+	img->zoom = 10;
 	img->map = ft_generate_map(map_name);
 	while (j < img->map->height)
 	{
@@ -34,12 +35,12 @@ t_data	*ft_init_data(char *map_name)
 		// printf("\n");
 		j++;
 	}
-	img->image = mlx_new_image(img->mlx, img->map->width * ZOOM + 1000, \
-					img->map->height * ZOOM + 1000);
+	img->image = mlx_new_image(img->mlx, 5200, \
+					4500);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
-	img->window = mlx_new_window(img->mlx, img->map->width + 1500, \
-				img->map->height + 1000, "FdF");
+	img->window = mlx_new_window(img->mlx, 1700, \
+				1400, "FdF");
 	img->vertex = ft_generate_vertex_map(img->map);
 	ft_centrage_vertex_map(img->vertex, img->map);
 	i = 0;
@@ -60,6 +61,7 @@ t_data	*ft_init_data(char *map_name)
 	j = 0;
 	// printf("\n\n");
 	// ft_rotation_axe_x(img);
+	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);
 	while (j < img->map->height)
@@ -120,15 +122,16 @@ void	ft_draw(t_data *img)
 		printf("Ligne j : %ld\n", j);
 		while (i < img->map->width - 1)
 		{
-			printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
-			printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, img->vertex[j][i].z);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f, couleur = %d, indice = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z, img->vertex[j][i].color, *img->vertex[j][i].indice_tab_color);
+			printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x + 800, img->vertex[j][i].y + 750, img->vertex[j][i].z);
+			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, img->vertex[j][i].z);
+			// printf("Position dans l espace : x = %f, y = %f, z = %f, couleur = %d, indice = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z, img->vertex[j][i].color, *img->vertex[j][i].indice_tab_color);				
 			ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
-			printf("1ere trace\n");
-			printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
-			printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, img->vertex[j][i].z);
+			// printf("1ere trace\n");
+			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
+			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, img->vertex[j][i].z);
 			ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
-			printf("2eme trace\n\n");
+			// printf("2eme trace\n\n");
+			
 			i++;
 		}
 		j++;

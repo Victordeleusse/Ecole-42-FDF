@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/09 12:00:47 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:16:20 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <time.h>
 
 # ifndef ZOOM
-#  define ZOOM 40
+#  define ZOOM 10
 # endif
 
 # ifndef COLOR_MIN
@@ -43,16 +43,16 @@
 
 /////
 # ifndef THETA_Y
-#  define THETA_Y 15
+#  define THETA_Y 65
 # endif
 /////
 
 # ifndef THETA_X
-#  define THETA_X 55
+#  define THETA_X 60
 # endif
 
 # ifndef THETA2
-#  define THETA2 15
+#  define THETA2 30
 # endif
 
 ////////////////////////////////// COLOR.C ///////////////////////////////////
@@ -105,9 +105,9 @@ typedef struct s_vertex
 	int		*indice_tab_color;
 }t_vertex;
 
-t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
-t_vertex	**ft_generate_vertex_map(t_map *map);
-void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
+// t_vertex	*ft_generate_vertex(t_data *img, t_map *map, size_t j, int *color_tab);
+// t_vertex	**ft_generate_vertex_map(t_data *img, t_map *map);
+// void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
@@ -120,6 +120,7 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			zoom;
 	t_map		*map;
 	t_vertex	**vertex;
 }t_data;
@@ -132,6 +133,10 @@ void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
 int 		mouse_event(int button, int x, int y, void *param);
 int			close_window(int key, t_data *img);
+t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
+t_vertex	**ft_generate_vertex_map(t_map *map);
+void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
+void		ft_zoom(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 

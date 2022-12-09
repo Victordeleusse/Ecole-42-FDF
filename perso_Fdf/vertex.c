@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/09 11:02:19 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:52:36 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab)
 		return (NULL);
 	while (i < map->width)
 	{
-		v[i].x = i * ZOOM + 9 * ZOOM;
-		v[i].y = j * ZOOM + 9 * ZOOM;
+		v[i].x = i;
+		v[i].y = j;
 		// printf("coordonnees du point : x-> %f, y-> %f\n", v[i].x, v[i].y);
-		v[i].z = map->map_int[j][i] * ZOOM / 25;
+		v[i].z = map->map_int[j][i];
 		v[i].indice_tab_color = ft_calloc((size_t) sizeof(int), (size_t) 1);
 		v[i].color = ft_color_vertex(map, map->map_int[j][i], color_tab, v[i].indice_tab_color);
 		i++;
@@ -62,6 +62,28 @@ t_vertex	**ft_generate_vertex_map(t_map *map)
 	}
 	return (vtx);
 }
+
+void	ft_zoom(t_data *img)
+{
+	size_t		i;
+	size_t		j;
+
+	j = 0;
+	printf("zoom : %d\n\n", img->zoom);
+	while (j < img->map->height)
+	{
+		i = 0;
+		while (i < img->map->width)
+		{
+			img->vertex[j][i].x = img->vertex[j][i].x * img->zoom;
+			img->vertex[j][i].y = img->vertex[j][i].y * img->zoom; 
+			img->vertex[j][i].z = img->vertex[j][i].z * img->zoom / 20;
+			i++; 
+		}
+		j++;
+	}
+}
+
 
 void	ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map)
 {
@@ -102,7 +124,7 @@ void	ft_rotation_plane(t_data *img)
 			k = img->vertex[j][i].x;
 			img->vertex[j][i].x = img->vertex[j][i].x * cos(THETA2 / 57.2958) - img->vertex[j][i].y * sin(THETA2 / 57.2958);
 			img->vertex[j][i].y = k * sin(THETA2 / 57.2958) + img->vertex[j][i].y * cos(THETA2 / 57.2958);
-			img->vertex[j][i].x += 200;
+			// img->vertex[j][i].x += 200;
 			i++;
 		}
 		j++;
