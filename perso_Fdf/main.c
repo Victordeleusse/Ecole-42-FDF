@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 19:14:37 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:05:07 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,16 @@ t_data	*ft_init_data(char *map_name)
 	i = 0;
 	j = 0;
 	// printf("\n\n");
-	// ft_rotation_axe_y(img);
 	// ft_rotation_axe_x(img);
-	// ft_rotation_plane(img);
+	ft_rotation_axe_y(img);
+	ft_rotation_plane(img);
 	while (j < img->map->height)
 	{
 		i = 0;
 		while (i < img->map->width)
 		{	
-			// printf("Ligne j : %ld\n", j);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f, couleur = %d, indice = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z, img->vertex[j][i].color, *img->vertex[j][i].indice_tab_color);
 			i++;
 		}
-		// printf("\n\n");
 		j++;
 	}
 	return (img);
@@ -86,6 +83,27 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 	offset = (x  * (img->bits_per_pixel / 8) + y * img->line_length);
 	pixel_address = img->address + offset;
 	*(int *)pixel_address = color;
+}
+
+int	mouse_event(int button, int x, int y, void *param)
+{
+	ft_putnbr_fd(button, 1);
+	printf("\n");
+	ft_putnbr_fd(x, 1);
+	printf("\n");
+	ft_putnbr_fd(y, 1);
+	printf("\n\n");
+}
+
+int	close_window(int key, t_data *img)
+{
+	// ft_putnbr_fd(key, 1);
+	if (key == 65307)
+	{
+		printf("hello\n");
+		mlx_destroy_window(img->mlx, img->window);
+	}
+	return (0);
 }
 
 void	ft_draw(t_data *img)
@@ -116,6 +134,7 @@ void	ft_draw(t_data *img)
 		j++;
 	}
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
+	mlx_key_hook(img->window, &close_window, img);
 	mlx_loop(img->mlx);
 }
 

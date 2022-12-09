@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/08 19:15:40 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:00:47 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <time.h>
 
 # ifndef ZOOM
-#  define ZOOM 120
+#  define ZOOM 40
 # endif
 
 # ifndef COLOR_MIN
@@ -41,13 +41,15 @@
 #  define COLOR_TAB_SIZE 100
 # endif
 
+/////
 # ifndef THETA_Y
-#  define THETA_Y 45
+#  define THETA_Y 15
 # endif
+/////
 
-// # ifndef THETA_X
-// #  define THETA_X 50
-// # endif
+# ifndef THETA_X
+#  define THETA_X 55
+# endif
 
 # ifndef THETA2
 #  define THETA2 15
@@ -126,9 +128,10 @@ void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
 void		ft_rotation_plane(t_data *img);
-void		ft_rotation_axe_y(t_data *img);
 void		ft_rotation_axe_x(t_data *img);
-
+void		ft_rotation_axe_y(t_data *img);
+int 		mouse_event(int button, int x, int y, void *param);
+int			close_window(int key, t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
