@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/09 15:16:20 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:41:58 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 	int			zoom;
+	int			angle_rotation_y;
+	int			angle_rotation_plan;
 	t_map		*map;
 	t_vertex	**vertex;
 }t_data;
@@ -132,7 +134,7 @@ void		ft_rotation_plane(t_data *img);
 void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
 int 		mouse_event(int button, int x, int y, void *param);
-int			close_window(int key, t_data *img);
+int			ft_get_transfo(int key, t_data *img);
 t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
