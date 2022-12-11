@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/11 17:31:51 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:14:36 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ void	ft_draw(t_data *img)
 			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, img->vertex[j][i].z);
 			// printf("Position dans l espace : x = %f, y = %f, z = %f, couleur = %d, indice = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z, img->vertex[j][i].color, *img->vertex[j][i].indice_tab_color);				
 			// printf("ANGLE -> %d\n", img->angle_rotation_y);
-			ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
+			if (img->vertex[j][i].x < img->vertex[j][i + 1].x)
+				ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
 			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
 			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, img->vertex[j][i].z);
 			ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);

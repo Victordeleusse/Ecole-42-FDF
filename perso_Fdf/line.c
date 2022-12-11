@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/11 17:12:35 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:57:52 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	float		nb_pixels;
 	int			color_indice;
 	int			*temp_indice_color;
+	int			offset;
+	char		*pixel_address;
 
 	delta_x = (float)(v2.x - v1.x);
 	delta_y = (float)(v2.y - v1.y);
@@ -56,13 +58,14 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	while (nb_pixels)
 	{
 		*(temp_indice_color) = *(temp_indice_color) + color_indice;
-		// printf("l'indice dans la tab des couleurs : %d -> couleur : %d\n", *(temp_indice_color), color_tab[*(temp_indice_color)]);
 		if (*(temp_indice_color) > 99)
 			*(temp_indice_color) = 99;
 		if (*(temp_indice_color) < 0)
 			*(temp_indice_color) = 0;
 		if ((float)v1.x + 800 > 0 && (float)v1.y + 750 > 0)
+		{	
 			ft_mlx_put_pixel(img, (float)v1.x + 800, (float)v1.y + 750, color_tab[*(temp_indice_color)]);
+		}
 		v1.x = v1.x + delta_x;
 		v1.y = v1.y + delta_y;
 		nb_pixels = nb_pixels - 1;
