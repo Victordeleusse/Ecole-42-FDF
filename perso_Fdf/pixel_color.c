@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:04:41 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/07 17:53:49 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:03:47 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	*ft_generate_color_tab(void)
 	return (color_tab);
 }
 
-int	ft_color_vertex(t_map *map, int hauteur_z, int *color_tab, int *indice_vertex)
+int	ft_color_vertex(t_map *map, int hauteur_z, \
+	int *color_tab, int *indice_vertex)
 {
 	int	min;
 	int	max;

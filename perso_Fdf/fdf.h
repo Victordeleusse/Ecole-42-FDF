@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/11 15:41:58 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:37:55 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,10 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*image;
+	void		*black;
 	void		*window;
 	char		*address;
+	char		*address_black;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -128,6 +130,7 @@ typedef struct s_data
 }t_data;
 
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
+void		ft_mlx_put_pixel_black(t_data *img, int x, int y);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
 void		ft_rotation_plane(t_data *img);
@@ -139,9 +142,12 @@ t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 void		ft_zoom(t_data *img);
+void		ft_black_screen(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
+int			ft_color_indice_pixel(t_vertex v1, t_vertex v2, float nb_pixels);
+int			ft_get_color(int *temp, t_vertex v1, t_vertex v2, float nb_pixels);
 void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab);
 
 #endif

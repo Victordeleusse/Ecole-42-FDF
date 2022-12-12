@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/11 17:14:42 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:35:15 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,27 +134,6 @@ void	ft_rotation_plane(t_data *img)
 		j++;
 	}
 }
-
-// void	ft_rotation_axe_x(t_data *img)
-// {
-// 	size_t		i;
-// 	size_t		j;
-// 	float		k;
-
-// 	j = 0;
-// 	while (j < img->map->height)
-// 	{
-// 		i = 0;
-// 		k = 0;
-// 		while (i < img->map->width)
-// 		{	
-// 			k = img->vertex[j][i].y;
-// 			img->vertex[j][i].y = img->vertex[j][i].z * -cos(THETA_Y / 57.2958) + img->vertex[j][i].y * sin(THETA_Y / 57.2958);
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
 
 void	ft_rotation_axe_y(t_data *img)
 {
