@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/12 12:06:11 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:05:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_data	*ft_init_data(char *map_name)
 	img->angle_rotation_plan = 30;
 	img->map = ft_generate_map(map_name);
 	img->image = mlx_new_image(img->mlx, 5200, 4500);
-	img->black = mlx_new_image(img->mlx, 5200, 4500);
+	// img->black = mlx_new_image(img->mlx, 5200, 4500);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
-	img->address_black = mlx_get_data_addr(img->black, &img->bits_per_pixel, \
+	// img->address_black = mlx_get_data_addr(img->black, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
-	ft_black_screen(img);
+	// ft_black_screen(img);
 	img->window = mlx_new_window(img->mlx, 1700, \
 				1400, "FdF");
 	img->vertex = ft_generate_vertex_map(img->map);
@@ -51,43 +51,43 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 	*(int *)pixel_address = color;
 }
 
-void	ft_mlx_put_pixel_black(t_data *img, int x, int y)
-{
-	int			offset;
-	char		*pixel_address;
+// void	ft_mlx_put_pixel_black(t_data *img, int x, int y)
+// {
+// 	int			offset;
+// 	char		*pixel_address;
 
-	offset = (x * (img->bits_per_pixel / 8) + y * img->line_length);
-	pixel_address = img->address_black + offset;
-	*(int *)pixel_address = 0xFFFFFF;
-}
+// 	offset = (x * (img->bits_per_pixel / 8) + y * img->line_length);
+// 	pixel_address = img->address_black + offset;
+// 	*(int *)pixel_address = 0xFFFFFF;
+// }
 
-void	ft_black_screen(t_data *img)
-{
-	int	i;
-	int	j;
+// void	ft_black_screen(t_data *img)
+// {
+// 	int	i;
+// 	int	j;
 
-	j = 0;
-	while (j < 1400)
-	{
-		i = 0;
-		while (i < 1700)
-		{
-			ft_mlx_put_pixel_black(img, i, j);
-			i++;
-		}
-	j++;
-	}	
-}
+// 	j = 0;
+// 	while (j < 1400)
+// 	{
+// 		i = 0;
+// 		while (i < 1700)
+// 		{
+// 			ft_mlx_put_pixel_black(img, i, j);
+// 			i++;
+// 		}
+// 	j++;
+// 	}	
+// }
 
-int	mouse_event(int button, int x, int y, void *param)
-{
-	ft_putnbr_fd(button, 1);
-	printf("\n");
-	ft_putnbr_fd(x, 1);
-	printf("\n");
-	ft_putnbr_fd(y, 1);
-	printf("\n\n");
-}
+// int	mouse_event(int button, int x, int y, void *param)
+// {
+// 	ft_putnbr_fd(button, 1);
+// 	printf("\n");
+// 	ft_putnbr_fd(x, 1);
+// 	printf("\n");
+// 	ft_putnbr_fd(y, 1);
+// 	printf("\n\n");
+// }
 
 int	ft_get_transfo(int key, t_data *img)
 {
@@ -95,17 +95,18 @@ int	ft_get_transfo(int key, t_data *img)
 	int	j;
 
 	// ft_putnbr_fd(key, 1);
-	// j = 0;
-	// while (j < 1400)
-	// {
-	// 	i = 0;
-	// 	while (i < 1700)
-	// 	{
-	// 		ft_mlx_put_pixel(img, i, j, 0x000000);
-	// 		i++;
-	// 	}
-	// j++;
-	// }	
+	j = 0;
+	while (j < 1400)
+	{
+		i = 0;
+		while (i < 1700)
+		{
+			ft_mlx_put_pixel(img, i, j, 0x000000);
+			i++;
+		}
+	j++;
+	}	
+	mlx_clear_window(img->mlx, img->window);
 	if (key == 97)
 		img->angle_rotation_plan = img->angle_rotation_plan + 10;
 	if (key == 115)
@@ -123,14 +124,17 @@ int	ft_get_transfo(int key, t_data *img)
 		mlx_destroy_window(img->mlx, img->window);
 		return (0);
 	}
+	// mlx_clear_window(img->mlx, img->window);
+	// mlx_destroy_window(img->mlx, img->window);
 	img->vertex = ft_generate_vertex_map(img->map);
 	ft_centrage_vertex_map(img->vertex, img->map);
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);
-	mlx_put_image_to_window(img->mlx, img->window, img->black, 0, 0);
-	ft_draw(img);
-	// mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
+	if (img->angle_rotation_y <= 140)
+		ft_draw(img);
+	else
+		ft_draw_heb(img);
 	return (0);
 }
 
@@ -138,29 +142,66 @@ void	ft_draw(t_data *img)
 {
 	int	i;
 	int	j;
+	int	z;
+	int	z_max;
 	int	*tab_color;
 
 	tab_color = ft_generate_color_tab();
-	j = 0;
-	while (j < img->map->height -1)
+	z = ft_min_map(img->map) * img->zoom / 12;
+	z_max = ft_max_map(img->map) * img->zoom / 12;
+	while(z <= z_max)
 	{
-		i = 0;
-		// printf("\n\nLigne j : %ld\n", j);
-		while (i < img->map->width - 1)
+		j = 0;
+		while (j < img->map->height -1)
 		{
-			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x + 800, img->vertex[j][i].y + 750, img->vertex[j][i].z);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i + 1].x, img->vertex[j][i + 1].y, img->vertex[j][i].z);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f, couleur = %d, indice = %d ||", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z, img->vertex[j][i].color, *img->vertex[j][i].indice_tab_color);				
-			// printf("ANGLE -> %d\n", img->angle_rotation_y);
-			// if (img->vertex[j][i].x < img->vertex[j][i + 1].x)
-			// if (j == 2)
-			ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j][i].x, img->vertex[j][i].y, img->vertex[j][i].z);
-			// printf("Position dans l espace : x = %f, y = %f, z = %f ||\n", img->vertex[j + 1][i].x, img->vertex[j + 1][i].y, img->vertex[j][i].z);
-			ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
-			i++;
+			i = 0;
+			while (i < img->map->width - 1)
+			{
+				if (img->vertex[j][i].z == z)
+				{	
+					ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
+					ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
+				}
+				i++;
+			}
+			j++;
 		}
-		j++;
+		z++;
+	}
+	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
+	mlx_key_hook(img->window, &ft_get_transfo, img);
+	mlx_loop(img->mlx);
+}
+
+void	ft_draw_heb(t_data *img)
+{
+	int	i;
+	int	j;
+	int	z;
+	int	z_max;
+	int	*tab_color;
+
+	tab_color = ft_generate_color_tab();
+	z = ft_min_map(img->map) * img->zoom / 12;
+	z_max = ft_max_map(img->map) * img->zoom / 12;
+	while(z <= z_max)
+	{
+		j = img->map->height - 2;
+		while (j >= 0)
+		{
+			i = img->map->width - 2;
+			while (i >= 0)
+			{
+				if (img->vertex[j][i].z == z)
+				{	
+					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], tab_color);
+					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], tab_color);
+				}
+				i--;
+			}
+			j--;
+		}
+		z++;
 	}
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
 	mlx_key_hook(img->window, &ft_get_transfo, img);

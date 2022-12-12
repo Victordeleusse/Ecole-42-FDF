@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/12 11:37:55 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:59:55 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 void		ft_mlx_put_pixel_black(t_data *img, int x, int y);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
+void		ft_draw_heb(t_data *img);
 void		ft_rotation_plane(t_data *img);
 void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
