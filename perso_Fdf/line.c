@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 14:30:16 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:25:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,28 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	free(temp);
 }
 
-void	ft_draw_red_line(t_data *img, int x1, int y1, int x2, int int *color_tab)
+void	ft_draw_red_line(t_data *img, float x1, float y1, float x2, float y2)
+{
+	float		delta_x;
+	float		delta_y;
+	int			hypot;
+	int			hypotata;
+	double		nb_pixels;
+
+	delta_x = (float)(x2 - x1);
+	delta_y = (float)(y2 - y1);
+	hypot = (delta_x * delta_x + delta_y * delta_y);
+	nb_pixels = (float)ft_sqrt(hypot);
+	if (nb_pixels < 1)
+		nb_pixels = 1;
+	delta_x = delta_x / nb_pixels;
+	delta_y = delta_y / nb_pixels;
+	while (nb_pixels--)
+	{
+		hypot = round(x1);
+		hypotata = round(y1);
+		ft_mlx_put_pixel(img, hypot, hypotata, 0xFF0000);
+		x1 = x1 + delta_x;
+		y1 = y1 + delta_y;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 14:28:50 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:53:15 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,52 @@ void	ft_key_action(int key, t_data *img)
 
 int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 {
-	// ft_putnbr_fd(button, 1);
-	ft_printf("coordonnees du point 1:\n");
-	ft_putnbr_fd(x, 1);
-	ft_printf(" || ");
-	ft_putnbr_fd(y, 1);
-	ft_printf("\n");
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < 1400)
+	{
+		i = 0;
+		while (i < 1700)
+			ft_mlx_put_pixel(img, i++, j, 0x000000);
+	j++;
+	}	
+	mlx_clear_window(img->mlx, img->window);
 	if (img->x1 == 0)
 	{
+		printf("Coordonnees du point 1 :\n");
+		ft_putnbr_fd(x, 1);
+		ft_printf(" || ");
+		ft_putnbr_fd(y, 1);
+		ft_printf("\n");
 		img->x1 = x;
 		img->y1 = y;
 	}
-	if (img->x1 != 0)
+	else
 	{
+		printf("Coordonnees du point 2 :\n");
+		ft_putnbr_fd(x, 1);
+		ft_printf(" || ");
+		ft_putnbr_fd(y, 1);
+		ft_printf("\n");
 		img->x2 = x;
 		img->y2 = y;
-		
+		ft_draw_red_line(img, img->x1, img->y1, img->x2, img->y2);
+		img->x1 = 0;
+		img->y1 = 0;
+		img->x2 = 0;
+		img->y2 = 0;
 	}
-	// mouse_event(button, img);
+	img->vertex = ft_generate_vertex_map(img->map);
+	ft_centrage_vertex_map(img->vertex, img->map);
+	ft_zoom(img);
+	ft_rotation_axe_y(img);
+	ft_rotation_plane(img);
+	if (img->angle_rotation_y <= 140)
+		ft_draw(img);
+	else
+		ft_draw_heb(img);
 	return (0);
 }
 
