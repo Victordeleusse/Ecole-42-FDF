@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 17:36:10 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:01:30 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_data
 	char		*address;
 	float		*p1;
 	float		*p2;
+	int			*tab_color;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;

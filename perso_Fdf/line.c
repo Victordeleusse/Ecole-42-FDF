@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 16:24:16 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:45:54 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ void	ft_draw_red_line(t_data *img, float *p1, float *p2)
 		p1[0] = p1[0] + delta_x;
 		p1[1] = p1[1] + delta_y;
 	}
+	free(p1);
+	free(p2);
 }

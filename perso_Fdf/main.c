@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 18:30:18 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:27:04 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_data	*ft_init_data(char *map_name)
 	img->zoom = 43;
 	img->angle_rotation_y = 60;
 	img->angle_rotation_plan = 30;
+	img->tab_color = ft_generate_color_tab();
 	img->map = ft_generate_map(map_name);
 	img->image = mlx_new_image(img->mlx, 4000, 3500);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
@@ -95,7 +96,7 @@ void	ft_key_action(int key, t_data *img)
 
 int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 {
-	ft_clear_window(img);	
+	ft_clear_window(img);
 	mlx_clear_window(img->mlx, img->window);
 	if (img->p1[0] == 0)
 	{
@@ -107,10 +108,8 @@ int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 		img->p2[0] = (float)x;
 		img->p2[1] = (float)y;
 		ft_draw_red_line(img, img->p1, img->p2);
-		img->p1[0] = 0;
-		img->p1[1] = 0;
-		img->p2[0] = 0;
-		img->p2[1] = 0;
+		img->p1 = ft_generate_doublette(0, 0);
+		img->p2 = ft_generate_doublette(0, 0);
 	}
 	img->vertex = ft_generate_vertex_map(img->map);
 	ft_centrage_vertex_map(img->vertex, img->map);
@@ -161,15 +160,22 @@ void	ft_finish_proper(t_data *img, int *tab_color)
 	}
 }
 
+void	ft_mlx_pack(t_data *img)
+{
+	ft_finish_proper(img, img->tab_color);
+	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
+	mlx_key_hook(img->window, &ft_get_transfo, img);
+	mlx_mouse_hook(img->window, &ft_get_transfo_mouse, img);
+	mlx_loop(img->mlx);
+}
+
 void	ft_draw(t_data *img)
 {
 	int		i;
 	int		j;
 	float	z;
 	float	z_max;
-	int		*tab_color;
 
-	tab_color = ft_generate_color_tab();
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
 	while(z <= z_max)
@@ -182,8 +188,8 @@ void	ft_draw(t_data *img)
 			{
 				if ((int)img->vertex[j][i].z == (int)z)
 				{	
-					ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
-					ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
+					ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], img->tab_color);
+					ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], img->tab_color);
 				}
 				i++;
 			}
@@ -191,11 +197,7 @@ void	ft_draw(t_data *img)
 		}
 		z++;
 	}
-	ft_finish_proper(img, tab_color);
-	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
-	mlx_key_hook(img->window, &ft_get_transfo, img);
-	mlx_mouse_hook(img->window, &ft_get_transfo_mouse, img);
-	mlx_loop(img->mlx);
+	ft_mlx_pack(img);
 }
 
 void	ft_draw_heb(t_data *img)
@@ -204,9 +206,7 @@ void	ft_draw_heb(t_data *img)
 	int	j;
 	int	z;
 	int	z_max;
-	int	*tab_color;
 
-	tab_color = ft_generate_color_tab();
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
 	while(z <= z_max)
@@ -219,8 +219,8 @@ void	ft_draw_heb(t_data *img)
 			{
 				if ((int)img->vertex[j + 1][i + 1].z == (int)z)
 				{	
-					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], tab_color);
-					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], tab_color);
+					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], img->tab_color);
+					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], img->tab_color);
 				}
 				i--;
 			}
@@ -228,11 +228,7 @@ void	ft_draw_heb(t_data *img)
 		}
 		z++;
 	}
-	ft_finish_proper(img, tab_color);
-	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
-	mlx_key_hook(img->window, &ft_get_transfo, img);
-	mlx_mouse_hook(img->window, &ft_get_transfo_mouse, img);
-	mlx_loop(img->mlx);
+	ft_mlx_pack(img);
 }
 
 
