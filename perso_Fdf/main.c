@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 16:25:00 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:10:29 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_data	*ft_init_data(char *map_name)
 	img->angle_rotation_y = 60;
 	img->angle_rotation_plan = 30;
 	img->map = ft_generate_map(map_name);
-	img->image = mlx_new_image(img->mlx, 5200, 4500);
+	img->image = mlx_new_image(img->mlx, 4000, 3500);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
 	img->window = mlx_new_window(img->mlx, 1700, \
@@ -63,9 +63,9 @@ void	ft_key_action(int key, t_data *img)
 	if (key == 115)
 		img->angle_rotation_plan = img->angle_rotation_plan - 10;
 	if (key == 122)
-		img->zoom = img->zoom + 3;
+		img->zoom = img->zoom + 2;
 	if (key == 100)
-		img->zoom = img->zoom - 3;
+		img->zoom = img->zoom - 2;
 	if (key == 113)
 		img->angle_rotation_y = img->angle_rotation_y + 10;
 	if (key == 119)
@@ -169,15 +169,15 @@ void	ft_finish_proper(t_data *img, int *tab_color)
 
 void	ft_draw(t_data *img)
 {
-	int	i;
-	int	j;
-	int	z;
-	int	z_max;
-	int	*tab_color;
+	int		i;
+	int		j;
+	float	z;
+	float	z_max;
+	int		*tab_color;
 
 	tab_color = ft_generate_color_tab();
-	z = ft_min_map(img->map) * img->zoom / 12;
-	z_max = ft_max_map(img->map) * img->zoom / 12;
+	z = (float)ft_min_map(img->map) * img->zoom / 12;
+	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
 	while(z <= z_max)
 	{
 		j = 0;
@@ -186,7 +186,7 @@ void	ft_draw(t_data *img)
 			i = 0;
 			while (i < img->map->width - 1)
 			{
-				if (img->vertex[j][i].z == z)
+				if ((int)img->vertex[j][i].z == (int)z)
 				{	
 					ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
 					ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
@@ -213,8 +213,8 @@ void	ft_draw_heb(t_data *img)
 	int	*tab_color;
 
 	tab_color = ft_generate_color_tab();
-	z = ft_min_map(img->map) * img->zoom / 12;
-	z_max = ft_max_map(img->map) * img->zoom / 12;
+	z = (float)ft_min_map(img->map) * img->zoom / 12;
+	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
 	while(z <= z_max)
 	{
 		j = img->map->height - 3;
@@ -223,7 +223,7 @@ void	ft_draw_heb(t_data *img)
 			i = img->map->width - 2;
 			while (i >= 0)
 			{
-				if (img->vertex[j][i].z == z)
+				if ((int)img->vertex[j][i].z == (int)z)
 				{	
 					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], tab_color);
 					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], tab_color);

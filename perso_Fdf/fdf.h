@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 16:31:10 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:58:27 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	int			zoom;
+	float		zoom;
 	int			angle_rotation_y;
 	int			angle_rotation_plan;
 	t_map		*map;
@@ -129,7 +129,6 @@ typedef struct s_data
 void		ft_close(t_data *img);
 void		ft_key_action(int key, t_data *img);
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
-// void		ft_mlx_put_pixel_black(t_data *img, int x, int y);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
 void		ft_draw_heb(t_data *img);
