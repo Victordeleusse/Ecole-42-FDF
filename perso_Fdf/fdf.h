@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 16:58:27 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:36:10 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 void		ft_zoom(t_data *img);
 float		*ft_generate_doublette(float x, float y);
 void		ft_draw_red_line(t_data *img, float *p1, float *p2);
+void		ft_clear_window(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 

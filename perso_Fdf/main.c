@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 17:10:29 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:30:18 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_data	*ft_init_data(char *map_name)
 	img->mlx = mlx_init();
 	img->p1 = ft_generate_doublette(0, 0);
 	img->p2 = ft_generate_doublette(0, 0);
-	img->zoom = 27;
+	img->zoom = 43;
 	img->angle_rotation_y = 60;
 	img->angle_rotation_plan = 30;
 	img->map = ft_generate_map(map_name);
@@ -47,6 +47,21 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 	offset = (x * (img->bits_per_pixel / 8) + y * img->line_length);
 	pixel_address = img->address + offset;
 	*(int *)pixel_address = color;
+}
+
+void	ft_clear_window(t_data *img)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < 1400)
+	{
+		i = 0;
+		while (i < 1700)
+			ft_mlx_put_pixel(img, i++, j, 0x000000);
+	j++;
+	}	
 }
 
 void	ft_close(t_data *img)
@@ -80,17 +95,7 @@ void	ft_key_action(int key, t_data *img)
 
 int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < 1400)
-	{
-		i = 0;
-		while (i < 1700)
-			ft_mlx_put_pixel(img, i++, j, 0x000000);
-	j++;
-	}	
+	ft_clear_window(img);	
 	mlx_clear_window(img->mlx, img->window);
 	if (img->p1[0] == 0)
 	{
@@ -121,18 +126,7 @@ int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 
 int	ft_get_transfo(int key, t_data *img)
 {
-	int	i;
-	int	j;
-
-	// ft_putnbr_fd(key, 1);
-	j = 0;
-	while (j < 1400)
-	{
-		i = 0;
-		while (i < 1700)
-			ft_mlx_put_pixel(img, i++, j, 0x000000);
-	j++;
-	}	
+	ft_clear_window(img);
 	mlx_clear_window(img->mlx, img->window);
 	ft_key_action(key, img);
 	img->vertex = ft_generate_vertex_map(img->map);
@@ -140,7 +134,7 @@ int	ft_get_transfo(int key, t_data *img)
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);
-	if (img->angle_rotation_y <= 140)
+	if (img->angle_rotation_y <= 130)
 		ft_draw(img);
 	else
 		ft_draw_heb(img);
@@ -223,7 +217,7 @@ void	ft_draw_heb(t_data *img)
 			i = img->map->width - 2;
 			while (i >= 0)
 			{
-				if ((int)img->vertex[j][i].z == (int)z)
+				if ((int)img->vertex[j + 1][i + 1].z == (int)z)
 				{	
 					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], tab_color);
 					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], tab_color);
