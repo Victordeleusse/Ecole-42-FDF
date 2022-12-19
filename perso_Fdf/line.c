@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 15:25:33 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:24:16 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,19 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	free(temp);
 }
 
-void	ft_draw_red_line(t_data *img, float x1, float y1, float x2, float y2)
+float	*ft_generate_doublette(float x, float y)
+{
+	int	*p;
+
+	p = (int *)malloc(sizeof(int) * 2);
+	if (!p)
+		return (NULL);
+	p[0] = x;
+	p[1] = y;
+	return (p);
+}
+
+void	ft_draw_red_line(t_data *img, float *p1, float *p2)
 {
 	float		delta_x;
 	float		delta_y;
@@ -78,8 +90,8 @@ void	ft_draw_red_line(t_data *img, float x1, float y1, float x2, float y2)
 	int			hypotata;
 	double		nb_pixels;
 
-	delta_x = (float)(x2 - x1);
-	delta_y = (float)(y2 - y1);
+	delta_x = (float)(p2[0] - p1[0]);
+	delta_y = (float)(p2[1] - p1[1]);
 	hypot = (delta_x * delta_x + delta_y * delta_y);
 	nb_pixels = (float)ft_sqrt(hypot);
 	if (nb_pixels < 1)
@@ -88,10 +100,10 @@ void	ft_draw_red_line(t_data *img, float x1, float y1, float x2, float y2)
 	delta_y = delta_y / nb_pixels;
 	while (nb_pixels--)
 	{
-		hypot = round(x1);
-		hypotata = round(y1);
+		hypot = round(p1[0]);
+		hypotata = round(p1[1]);
 		ft_mlx_put_pixel(img, hypot, hypotata, 0xFF0000);
-		x1 = x1 + delta_x;
-		y1 = y1 + delta_y;
+		p1[0] = p1[0] + delta_x;
+		p1[1] = p1[1] + delta_y;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 14:53:15 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:25:00 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ t_data	*ft_init_data(char *map_name)
 	if (!img)
 		return (NULL);
 	img->mlx = mlx_init();
-	img->x1 = 0;
-	img->y1 = 0;
-	img->x2 = 0;
-	img->y2 = 0;
+	img->p1 = ft_generate_doublette(0, 0);
+	img->p2 = ft_generate_doublette(0, 0);
 	img->zoom = 27;
 	img->angle_rotation_y = 60;
 	img->angle_rotation_plan = 30;
@@ -50,11 +48,6 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 	pixel_address = img->address + offset;
 	*(int *)pixel_address = color;
 }
-
-// void	mouse_event(int button, t_data *img)
-// {
-
-// }
 
 void	ft_close(t_data *img)
 {
@@ -99,30 +92,20 @@ int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 	j++;
 	}	
 	mlx_clear_window(img->mlx, img->window);
-	if (img->x1 == 0)
+	if (img->p1[0] == 0)
 	{
-		printf("Coordonnees du point 1 :\n");
-		ft_putnbr_fd(x, 1);
-		ft_printf(" || ");
-		ft_putnbr_fd(y, 1);
-		ft_printf("\n");
-		img->x1 = x;
-		img->y1 = y;
+		img->p1[0] = (float)x;
+		img->p1[1] = (float)y;
 	}
 	else
 	{
-		printf("Coordonnees du point 2 :\n");
-		ft_putnbr_fd(x, 1);
-		ft_printf(" || ");
-		ft_putnbr_fd(y, 1);
-		ft_printf("\n");
-		img->x2 = x;
-		img->y2 = y;
-		ft_draw_red_line(img, img->x1, img->y1, img->x2, img->y2);
-		img->x1 = 0;
-		img->y1 = 0;
-		img->x2 = 0;
-		img->y2 = 0;
+		img->p2[0] = (float)x;
+		img->p2[1] = (float)y;
+		ft_draw_red_line(img, img->p1, img->p2);
+		img->p1[0] = 0;
+		img->p1[1] = 0;
+		img->p2[0] = 0;
+		img->p2[1] = 0;
 	}
 	img->vertex = ft_generate_vertex_map(img->map);
 	ft_centrage_vertex_map(img->vertex, img->map);
@@ -140,7 +123,6 @@ int	ft_get_transfo(int key, t_data *img)
 {
 	int	i;
 	int	j;
-	// int	mouse;
 
 	// ft_putnbr_fd(key, 1);
 	j = 0;

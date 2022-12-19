@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 15:24:49 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:31:10 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int			ft_max_map(t_map *map);
 int			ft_min_map(t_map *map);
 int			ft_new_color(int color_diff);
 int			*ft_generate_color_tab(void);
-int			ft_color_vertex(t_map *map, int hauteur_z, int *color_tab, int *indice_vertex);
+int			ft_color_vertex(t_map *map, int hauteur_z, \
+				int *color_tab, int *indice_vertex);
 
 ////////////////////////////////// VERTEX.C ///////////////////////////////////
 
@@ -105,10 +106,6 @@ typedef struct s_vertex
 	int		*indice_tab_color;
 }t_vertex;
 
-// t_vertex	*ft_generate_vertex(t_data *img, t_map *map, size_t j, int *color_tab);
-// t_vertex	**ft_generate_vertex_map(t_data *img, t_map *map);
-// void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
-
 ////////////////////////////////// MAIN.C ///////////////////////////////////
 
 typedef struct s_data
@@ -117,10 +114,8 @@ typedef struct s_data
 	void		*image;
 	void		*window;
 	char		*address;
-	int			x1;
-	int			y1;
-	int			x2;
-	int			y2;
+	float		*p1;
+	float		*p2;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -148,8 +143,8 @@ t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 void		ft_zoom(t_data *img);
-void		ft_draw_red_line(t_data *img, float x1, float y1, float x2, float y2);
-// void		mouse_event(int button, t_data *img);
+float		*ft_generate_doublette(float x, float y);
+void		ft_draw_red_line(t_data *img, float *p1, float *p2);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 
