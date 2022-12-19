@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/12 15:59:55 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:26:29 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,12 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*image;
-	void		*black;
 	void		*window;
 	char		*address;
-	char		*address_black;
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -129,21 +131,24 @@ typedef struct s_data
 	t_vertex	**vertex;
 }t_data;
 
+void		ft_close(t_data *img);
+void		ft_key_action(int key, t_data *img);
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
-void		ft_mlx_put_pixel_black(t_data *img, int x, int y);
+// void		ft_mlx_put_pixel_black(t_data *img, int x, int y);
 t_data		*ft_init_data(char *map_name);
 void		ft_draw(t_data *img);
 void		ft_draw_heb(t_data *img);
+void		ft_finish_proper(t_data *img, int *tab_color);
 void		ft_rotation_plane(t_data *img);
 void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
-int 		mouse_event(int button, int x, int y, void *param);
 int			ft_get_transfo(int key, t_data *img);
+int			ft_get_transfo_mouse(int button, int x, int y, t_data *img);
 t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 void		ft_zoom(t_data *img);
-void		ft_black_screen(t_data *img);
+// void		mouse_event(int button, t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
 

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/12 14:32:20 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:39:29 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ void	ft_zoom(t_data *img)
 		i = 0;
 		while (i < img->map->width)
 		{
-			if (img->zoom <= 12)
-				img->zoom = 13;
+			if (img->zoom <= 3)
+				img->zoom = 3;
 			img->vertex[j][i].x = img->vertex[j][i].x * img->zoom;
 			img->vertex[j][i].y = img->vertex[j][i].y * img->zoom;
 			if (img->zoom > 20)
 				img->vertex[j][i].z = img->vertex[j][i].z * (img->zoom / 18);
 			else
 				img->vertex[j][i].z = img->vertex[j][i].z * (img->zoom / 12);
-			i++; 
+			i++;
 		}
 		j++;
 	}

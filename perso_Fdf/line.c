@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:48:00 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/12 11:06:36 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:30:16 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,5 @@ void	ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab)
 	}
 	free(temp);
 }
+
+void	ft_draw_red_line(t_data *img, int x1, int y1, int x2, int int *color_tab)

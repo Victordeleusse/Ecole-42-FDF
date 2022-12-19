@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:16:07 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/07 10:27:56 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/19 10:11:34 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@
 //	
 
 #include "fdf.h"
-// typedef struct s_color_rgb
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// }t_color_rgb;
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
 
 int	ft_get_red(int color)
 {
