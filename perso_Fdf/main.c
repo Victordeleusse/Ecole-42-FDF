@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 19:27:04 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:36:53 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_data	*ft_init_data(char *map_name)
 	img->mlx = mlx_init();
 	img->p1 = ft_generate_doublette(0, 0);
 	img->p2 = ft_generate_doublette(0, 0);
-	img->zoom = 43;
-	img->angle_rotation_y = 60;
+	img->zoom = 60;
+	img->angle_rotation_y = 140;
 	img->angle_rotation_plan = 30;
 	img->tab_color = ft_generate_color_tab();
 	img->map = ft_generate_map(map_name);
@@ -125,15 +125,22 @@ int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 
 int	ft_get_transfo(int key, t_data *img)
 {
+	int	i;
+	int	j;
+
 	ft_clear_window(img);
 	mlx_clear_window(img->mlx, img->window);
 	ft_key_action(key, img);
+	if (img->angle_rotation_y > 180)
+		img->angle_rotation_y = 180;
+	if (img->angle_rotation_y < 0)
+		img->angle_rotation_y = 0;
 	img->vertex = ft_generate_vertex_map(img->map);
 	ft_centrage_vertex_map(img->vertex, img->map);
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);
-	if (img->angle_rotation_y <= 130)
+	if (img->angle_rotation_y <= 110)
 		ft_draw(img);
 	else
 		ft_draw_heb(img);
@@ -200,12 +207,14 @@ void	ft_draw(t_data *img)
 	ft_mlx_pack(img);
 }
 
+// void	ft_draw_heb_same_high(t_data *img, )
+
 void	ft_draw_heb(t_data *img)
 {
-	int	i;
-	int	j;
-	int	z;
-	int	z_max;
+	int		i;
+	int		j;
+	float	z;
+	float	z_max;
 
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
@@ -230,8 +239,6 @@ void	ft_draw_heb(t_data *img)
 	}
 	ft_mlx_pack(img);
 }
-
-
 
 int	main(int argc, char **argv)
 {
