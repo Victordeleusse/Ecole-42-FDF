@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 15:42:06 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:41:49 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@
 #  define COLOR_TAB_SIZE 100
 # endif
 
-/////
-# ifndef THETA_Y
-#  define THETA_Y 65
-# endif
-/////
-
 # ifndef THETA_X
 #  define THETA_X 60
 # endif
@@ -71,8 +65,6 @@ t_color_rgb	ft_get_rgb(int color);
 int			ft_get_int_color(t_color_rgb rgb);
 
 ////////////////////////////////// MAP.C ///////////////////////////////////
-
-// map[j][i] avec j = height et i = width
 
 typedef struct s_map
 {
@@ -127,7 +119,8 @@ typedef struct s_data
 	t_vertex	**vertex;
 }t_data;
 
-void		ft_close(t_data *img);
+// void		ft_close(t_data *img);
+void		ft_regenarate(t_data *img);
 void		ft_key_action(int key, t_data *img);
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
@@ -155,5 +148,11 @@ int			ft_color_indice_pixel(t_vertex v1, t_vertex v2, float nb_pixels);
 int			ft_get_color(int *temp, t_vertex v1, t_vertex v2, float nb_pixels);
 void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab);
 void		ft_draw_red_line(t_data *img, float *p1, float *p2);
+
+////////////////////////////////// FREE.C ///////////////////////////////////
+
+void		ft_free_vertex(t_data *img);
+void		ft_free_map(t_data *img);
+void		ft_free_data(t_data *img);
 
 #endif

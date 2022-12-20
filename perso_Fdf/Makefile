@@ -1,4 +1,4 @@
-SRCS = main.c map.c color.c pixel_color.c line.c vertex.c 
+SRCS = main.c map.c color.c pixel_color.c line.c vertex.c hook.c draw.c transformation.c free.c
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}
 
@@ -13,9 +13,8 @@ CFLAGS += -Wall
 CFLAGS += -Werror
 CFLAGS += -Wextra
 
-ifeq ($(debug), true)
-	CFLAGS += -fsanitize=address,undefined -g2
-endif
+CFLAGS += -fsanitize=address,undefined -g2
+
 
 %.o: %.c fdf.h
 			${CC} -I. ${MINILIB_PATH_LINUX} ${LIBFT_PATH} -MMD -c $< -o ${<:.c=.o}
