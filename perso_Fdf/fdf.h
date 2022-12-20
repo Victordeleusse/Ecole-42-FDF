@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 19:30:01 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:42:06 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void		ft_close(t_data *img);
 void		ft_key_action(int key, t_data *img);
 void		ft_mlx_put_pixel(t_data *img, int x, int y, int color);
 t_data		*ft_init_data(char *map_name);
+void		ft_cond_draw(t_data *img, int i, int j, float z);
+void		ft_cond_draw_heb(t_data *img, int i, int j, float z);
 void		ft_draw(t_data *img);
 void		ft_draw_heb(t_data *img);
 void		ft_finish_proper(t_data *img, int *tab_color);

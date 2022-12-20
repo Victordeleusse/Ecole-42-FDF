@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:04:41 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 17:07:46 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:42:41 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	ft_min_map(t_map *map)
 int	*ft_generate_color_tab(void)
 {
 	int		*color_tab;
-	int		color_change;
 	int		i;
 
 	i = 0;
@@ -75,10 +74,10 @@ int	*ft_generate_color_tab(void)
 int	ft_color_vertex(t_map *map, int hauteur_z, \
 	int *color_tab, int *indice_vertex)
 {
-	int	min;
-	int	max;
-	int	color_panel;
-	int	color_diff;
+	int		min;
+	int		max;
+	float	color_panel;
+	int		color_diff;
 
 	max = ft_max_map(map);
 	min = ft_min_map(map);
@@ -87,7 +86,7 @@ int	ft_color_vertex(t_map *map, int hauteur_z, \
 		*indice_vertex = COLOR_TAB_SIZE - 1;
 		return (color_tab[COLOR_TAB_SIZE - 1]);
 	}
-	color_panel = COLOR_TAB_SIZE / (max - min);
+	color_panel = (COLOR_TAB_SIZE / (max - min));
 	color_diff = (hauteur_z - min);
 	*indice_vertex = color_diff * color_panel;
 	return (color_tab[*indice_vertex]);

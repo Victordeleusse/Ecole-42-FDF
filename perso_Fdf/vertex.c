@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:20:19 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/19 17:01:08 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:44:23 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,11 @@ void	ft_rotation_plane(t_data *img)
 		while (i < img->map->width)
 		{	
 			k = img->vertex[j][i].x;
-			img->vertex[j][i].x = img->vertex[j][i].x * cos(img->angle_rotation_plan / 57.2958) - img->vertex[j][i].y * sin(img->angle_rotation_plan / 57.2958);
-			img->vertex[j][i].y = k * sin(img->angle_rotation_plan / 57.2958) + img->vertex[j][i].y * cos(img->angle_rotation_plan / 57.2958);
+			img->vertex[j][i].x = img->vertex[j][i].x * \
+				cos(img->angle_rotation_plan / 57.2958) - \
+				img->vertex[j][i].y * sin(img->angle_rotation_plan / 57.2958);
+			img->vertex[j][i].y = k * sin(img->angle_rotation_plan / 57.2958) \
+				+ img->vertex[j][i].y * cos(img->angle_rotation_plan / 57.2958);
 			i++;
 		}
 		j++;
@@ -147,7 +150,9 @@ void	ft_rotation_axe_y(t_data *img)
 		while (i < img->map->width)
 		{	
 			k = img->vertex[j][i].x;
-			img->vertex[j][i].x = img->vertex[j][i].z * -cos(img->angle_rotation_y / 57.2958) + img->vertex[j][i].x * sin(img->angle_rotation_y / 57.2958);
+			img->vertex[j][i].x = img->vertex[j][i].z * \
+				-cos(img->angle_rotation_y / 57.2958) + \
+				img->vertex[j][i].x * sin(img->angle_rotation_y / 57.2958);
 			i++;
 		}
 		j++;

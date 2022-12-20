@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 11:36:53 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:40:41 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_data	*ft_init_data(char *map_name)
 	img->mlx = mlx_init();
 	img->p1 = ft_generate_doublette(0, 0);
 	img->p2 = ft_generate_doublette(0, 0);
-	img->zoom = 60;
-	img->angle_rotation_y = 140;
+	img->zoom = 51;
+	img->angle_rotation_y = 100;
 	img->angle_rotation_plan = 30;
 	img->tab_color = ft_generate_color_tab();
 	img->map = ft_generate_map(map_name);
@@ -140,7 +140,7 @@ int	ft_get_transfo(int key, t_data *img)
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);
-	if (img->angle_rotation_y <= 110)
+	if (img->angle_rotation_y <= 130)
 		ft_draw(img);
 	else
 		ft_draw_heb(img);
@@ -176,6 +176,17 @@ void	ft_mlx_pack(t_data *img)
 	mlx_loop(img->mlx);
 }
 
+void	ft_cond_draw(t_data *img, int i, int j, float z)
+{
+	if ((int)img->vertex[j][i].z == (int)z)
+	{
+		ft_draw_line(img, img->vertex[j][i], \
+			img->vertex[j][i + 1], img->tab_color);
+		ft_draw_line(img, img->vertex[j][i], \
+			img->vertex[j + 1][i], img->tab_color);
+	}
+}
+
 void	ft_draw(t_data *img)
 {
 	int		i;
@@ -185,7 +196,7 @@ void	ft_draw(t_data *img)
 
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
-	while(z <= z_max)
+	while (z <= z_max)
 	{
 		j = 0;
 		while (j < img->map->height -2)
@@ -193,11 +204,7 @@ void	ft_draw(t_data *img)
 			i = 0;
 			while (i < img->map->width - 1)
 			{
-				if ((int)img->vertex[j][i].z == (int)z)
-				{	
-					ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], img->tab_color);
-					ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], img->tab_color);
-				}
+				ft_cond_draw(img, i, j, z);
 				i++;
 			}
 			j++;
@@ -207,7 +214,16 @@ void	ft_draw(t_data *img)
 	ft_mlx_pack(img);
 }
 
-// void	ft_draw_heb_same_high(t_data *img, )
+void	ft_cond_draw_heb(t_data *img, int i, int j, float z)
+{
+	if ((int)img->vertex[j][i + 1].z == (int)z)
+	{	
+		ft_draw_line(img, img->vertex[j][i + 1], \
+			img->vertex[j][i], img->tab_color);
+		ft_draw_line(img, img->vertex[j + 1][i], \
+			img->vertex[j][i], img->tab_color);
+	}
+}
 
 void	ft_draw_heb(t_data *img)
 {
@@ -218,7 +234,7 @@ void	ft_draw_heb(t_data *img)
 
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
-	while(z <= z_max)
+	while (z <= z_max)
 	{
 		j = img->map->height - 3;
 		while (j >= 0)
@@ -226,11 +242,7 @@ void	ft_draw_heb(t_data *img)
 			i = img->map->width - 2;
 			while (i >= 0)
 			{
-				if ((int)img->vertex[j + 1][i + 1].z == (int)z)
-				{	
-					ft_draw_line(img, img->vertex[j][i + 1], img->vertex[j][i], img->tab_color);
-					ft_draw_line(img, img->vertex[j + 1][i], img->vertex[j][i], img->tab_color);
-				}
+				ft_cond_draw_heb(img, i, j, z);
 				i--;
 			}
 			j--;
