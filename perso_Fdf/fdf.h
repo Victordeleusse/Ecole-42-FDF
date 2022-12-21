@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/21 10:19:48 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:48:32 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
 int			ft_get_transfo(int key, t_data *img);
 int			ft_get_transfo_mouse(int button, int x, int y, t_data *img);
+int			ft_get_transfo_window(t_data *img);
 t_vertex	*ft_generate_vertex(t_map *map, size_t j, int *color_tab);
 t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);

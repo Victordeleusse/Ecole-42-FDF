@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/21 12:42:56 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:08:28 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 void	ft_mlx_pack(t_data *img)
 {
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
+	mlx_hook(img->window, 17, 0, &ft_get_transfo_window, img);
 	mlx_key_hook(img->window, &ft_get_transfo, img);
 	mlx_mouse_hook(img->window, &ft_get_transfo_mouse, img);
 	mlx_loop(img->mlx);
