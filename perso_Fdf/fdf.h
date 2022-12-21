@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 18:41:49 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:19:48 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ t_vertex	**ft_generate_vertex_map(t_map *map);
 void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
 void		ft_zoom(t_data *img);
 float		*ft_generate_doublette(float x, float y);
-void		ft_draw_red_line(t_data *img, float *p1, float *p2);
 void		ft_clear_window(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
@@ -147,7 +146,7 @@ void		ft_clear_window(t_data *img);
 int			ft_color_indice_pixel(t_vertex v1, t_vertex v2, float nb_pixels);
 int			ft_get_color(int *temp, t_vertex v1, t_vertex v2, float nb_pixels);
 void		ft_draw_line(t_data *img, t_vertex v1, t_vertex v2, int *color_tab);
-void		ft_draw_red_line(t_data *img, float *p1, float *p2);
+void		ft_draw_red_line(t_data *img);
 
 ////////////////////////////////// FREE.C ///////////////////////////////////
 

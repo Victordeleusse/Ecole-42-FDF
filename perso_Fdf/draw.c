@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:06:26 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 16:12:21 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:32:16 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_draw(t_data *img)
 
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
+	ft_finish_proper(img, img->tab_color);
 	while (z <= z_max)
 	{
 		j = 0;
@@ -70,6 +71,7 @@ void	ft_draw_heb(t_data *img)
 
 	z = (float)ft_min_map(img->map) * img->zoom / 12;
 	z_max = (float)ft_max_map(img->map) * img->zoom / 12;
+	ft_finish_proper(img, img->tab_color);
 	while (z <= z_max)
 	{
 		j = img->map->height - 3;
@@ -86,4 +88,24 @@ void	ft_draw_heb(t_data *img)
 		z++;
 	}
 	ft_mlx_pack(img);
+}
+
+void	ft_finish_proper(t_data *img, int *tab_color)
+{
+	int	i;
+	int	j;
+
+	i = img->map->width - 1;
+	j = 0;
+	while (j < img->map->height - 2)
+	{
+		ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
+		j++;
+	}
+	i = 0;
+	while (i < img->map->width - 1)
+	{
+		ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
+		i++;
+	}
 }

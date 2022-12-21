@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 17:22:36 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:42:56 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,8 @@ void	ft_mlx_put_pixel(t_data *img, int x, int y, int color)
 	*(int *)pixel_address = color;
 }
 
-void	ft_finish_proper(t_data *img, int *tab_color)
-{
-	int	i;
-	int	j;
-
-	i = img->map->width - 1;
-	j = 0;
-	while (j < img->map->height - 2)
-	{
-		ft_draw_line(img, img->vertex[j][i], img->vertex[j + 1][i], tab_color);
-		j++;
-	}
-	i = 0;
-	while (i < img->map->width - 1)
-	{
-		ft_draw_line(img, img->vertex[j][i], img->vertex[j][i + 1], tab_color);
-		i++;
-	}
-}
-
 void	ft_mlx_pack(t_data *img)
 {
-	ft_finish_proper(img, img->tab_color);
 	mlx_put_image_to_window(img->mlx, img->window, img->image, 0, 0);
 	mlx_key_hook(img->window, &ft_get_transfo, img);
 	mlx_mouse_hook(img->window, &ft_get_transfo_mouse, img);
@@ -94,8 +73,6 @@ int	main(int argc, char **argv)
 			'./FdF XXX.txt' to execute\n\n", 1);
 		return (1);
 	}
-	if (!ft_init_data(argv[1]))
-		return (ft_printf("Error occurred for file %s\n", argv[1]), 1);
 	img = ft_init_data(argv[1]);
 	if (img == NULL)
 		return (0);

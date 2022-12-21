@@ -13,8 +13,8 @@ CFLAGS += -Wall
 CFLAGS += -Werror
 CFLAGS += -Wextra
 
-CFLAGS += -fsanitize=address,undefined -g2
-
+# CFLAGS += -fsanitize=address,undefined -g2
+# CFLAGS += -valgrind
 
 %.o: %.c fdf.h
 			${CC} -I. ${MINILIB_PATH_LINUX} ${LIBFT_PATH} -MMD -c $< -o ${<:.c=.o}

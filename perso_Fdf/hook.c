@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:56:14 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 18:43:11 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:17:32 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ int	ft_get_transfo_mouse(int button, int x, int y, t_data *img)
 	{
 		img->p2[0] = (float)x;
 		img->p2[1] = (float)y;
-		ft_draw_red_line(img, img->p1, img->p2);
-		img->p1 = ft_generate_doublette(0, 0);
-		img->p2 = ft_generate_doublette(0, 0);
+		ft_draw_red_line(img);
+		img->p1[0] = 0;
+		img->p1[1] = 0;
+		img->p2[0] = 0;
+		img->p2[1] = 0;
 	}
 	ft_regenarate(img);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:25:53 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/04 16:22:35 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:47:18 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ size_t	ft_width(char *str)
 		while (str[i] != ' ' && str[i] != '\0' && str[i] != '\n')
 			i++;
 	}
+	free (str);
 	return (compteur);
 }
 
@@ -57,9 +58,7 @@ size_t	ft_width_max(size_t height, char *map_name)
 t_map	*ft_init_map(char *map_name)
 {
 	int		fd;
-	int		*line;
-	size_t	i;
-	size_t	j;
+	char	*str;
 	t_map	*map;
 
 	map = (t_map *)malloc(sizeof(t_map));
@@ -69,8 +68,14 @@ t_map	*ft_init_map(char *map_name)
 	map->width = 0;
 	map->height = 0;
 	fd = open(map_name, O_RDONLY);
-	while (get_next_line(fd))
+	while (1)
+	{	
+		str = get_next_line(fd);
+		if (!str)
+			break ;
+		free(str);
 		map->height++;
+	}
 	map->width = ft_width_max(map->height, map_name);
 	map->map_int = ft_calloc((size_t) sizeof(int *), map->height);
 	if (!map->map_int)
@@ -92,8 +97,10 @@ int	*ft_line_int(char *str, size_t width)
 	while (tab[i] != 0)
 	{
 		line[i] = ft_atoi((const char *)tab[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 	return (line);
 }
 
@@ -111,6 +118,7 @@ t_map	*ft_generate_map(char *map_name)
 	{
 		str = get_next_line(fd);
 		map->map_int[j] = ft_line_int(str, map->width);
+		free(str);
 		j++;
 	}
 	return (map);
