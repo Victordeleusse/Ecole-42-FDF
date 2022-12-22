@@ -1,4 +1,4 @@
-SRCS = main.c map.c color.c pixel_color.c line.c vertex.c hook.c draw.c transformation.c free.c
+SRCS = main.c map.c color.c pixel_color.c line.c vertex.c hook.c draw.c transformation.c free.c pixel.c
 OBJS = ${SRCS:.c=.o}
 DEPS = ${SRCS:.c=.d}
 
@@ -13,7 +13,7 @@ CFLAGS += -Wall
 CFLAGS += -Werror
 CFLAGS += -Wextra
 
-# CFLAGS += -fsanitize=address,undefined -g2
+CFLAGS += -fsanitize=address,undefined -g2
 # CFLAGS += -valgrind
 
 %.o: %.c fdf.h

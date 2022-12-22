@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:06:26 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/21 10:32:16 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:24:11 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_cond_draw(t_data *img, int i, int j, float z)
 {
-	if ((int)img->vertex[j][i].z == (int)z)
 	{
 		ft_draw_line(img, img->vertex[j][i], \
 			img->vertex[j][i + 1], img->tab_color);
@@ -53,7 +52,6 @@ void	ft_draw(t_data *img)
 
 void	ft_cond_draw_heb(t_data *img, int i, int j, float z)
 {
-	if ((int)img->vertex[j][i + 1].z == (int)z)
 	{	
 		ft_draw_line(img, img->vertex[j][i + 1], \
 			img->vertex[j][i], img->tab_color);
