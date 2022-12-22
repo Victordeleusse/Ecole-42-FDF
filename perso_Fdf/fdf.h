@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:29:12 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/22 11:19:40 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:06:14 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ typedef struct s_data
 	float		*p1;
 	float		*p2;
 	int			*tab_color;
+	float		dx;
+	float		dy;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -200,7 +202,8 @@ void		ft_finish_proper(t_data *img, int *tab_color);
 void		ft_rotation_plane(t_data *img);
 void		ft_rotation_axe_x(t_data *img);
 void		ft_rotation_axe_y(t_data *img);
-void		ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map);
+void		ft_centrage_vertex_map(t_data *img, t_vertex **vertex_map, \
+				t_map *map);
 void		ft_zoom(t_data *img);
 
 ////////////////////////////////// LINE.C ///////////////////////////////////
@@ -224,5 +227,6 @@ void		ft_draw_red_line(t_data *img);
 void		ft_free_vertex(t_data *img);
 void		ft_free_map(t_data *img);
 void		ft_free_data(t_data *img);
+void		ft_group_free(t_data *img);
 
 #endif

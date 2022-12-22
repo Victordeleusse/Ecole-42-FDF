@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:56:14 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/22 11:22:49 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:06:31 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ void	ft_key_action(int key, t_data *img)
 		img->angle_rotation_y = img->angle_rotation_y + 10;
 	if (key == 119)
 		img->angle_rotation_y = img->angle_rotation_y - 10;
+	if (key == 65361)
+		img->dx = img->dx - 1;
+	if (key == 65363)
+		img->dx = img->dx + 1;
+	if (key == 65362)
+		img->dy = img->dy - 1;
+	if (key == 65364)
+		img->dy = img->dy + 1;
 	if (key == 65307)
 	{
-		ft_free_vertex(img);
-		ft_free_map(img);
-		ft_free_data(img);
-		free(img);
-		exit(0);
+		ft_group_free(img);
 		return ;
 	}
 }
@@ -92,7 +96,7 @@ void	ft_regenarate(t_data *img)
 {
 	ft_free_vertex(img);
 	img->vertex = ft_generate_vertex_map(img->map);
-	ft_centrage_vertex_map(img->vertex, img->map);
+	ft_centrage_vertex_map(img, img->vertex, img->map);
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:30:22 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/20 17:01:19 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:51:20 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_zoom(t_data *img)
 	}
 }
 
-void	ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map)
+void	ft_centrage_vertex_map(t_data *img, t_vertex **vertex_map, t_map *map)
 {
 	size_t	i;
 	size_t	j;
@@ -54,6 +54,8 @@ void	ft_centrage_vertex_map(t_vertex **vertex_map, t_map *map)
 		{
 			vertex_map[j][i].x = vertex_map[j][i].x - x_max / 2;
 			vertex_map[j][i].y = vertex_map[j][i].y - y_max / 2;
+			vertex_map[j][i].x = vertex_map[j][i].x + img->dx;
+			vertex_map[j][i].y = vertex_map[j][i].y + img->dy;
 			i++;
 		}
 		j++;

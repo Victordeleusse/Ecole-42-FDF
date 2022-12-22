@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:52:38 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/22 10:51:17 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:53:33 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ t_data	*ft_init_data(char *map_name)
 	img->zoom = 51;
 	img->angle_rotation_y = 100;
 	img->angle_rotation_plan = 30;
+	img->dx = 0;
+	img->dy = 0;
 	img->tab_color = ft_generate_color_tab();
 	img->map = ft_generate_map(map_name);
 	img->image = mlx_new_image(img->mlx, 4000, 3500);
 	img->address = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 					&img->line_length, &img->endian);
-	img->window = mlx_new_window(img->mlx, 1700, \
-				1400, "FdF");
+	img->window = mlx_new_window(img->mlx, 1700, 1400, "FdF");
 	img->vertex = ft_generate_vertex_map(img->map);
-	ft_centrage_vertex_map(img->vertex, img->map);
+	ft_centrage_vertex_map(img, img->vertex, img->map);
 	ft_zoom(img);
 	ft_rotation_axe_y(img);
 	ft_rotation_plane(img);

@@ -6,7 +6,7 @@
 /*   By: vde-leus <vde-leus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:23:06 by vde-leus          #+#    #+#             */
-/*   Updated: 2022/12/21 12:43:38 by vde-leus         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:06:02 by vde-leus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,13 @@ void	ft_free_data(t_data *img)
 		free(img->p2);
 	if (img->tab_color)
 		free(img->tab_color);
+}
+
+void	ft_group_free(t_data *img)
+{
+	ft_free_vertex(img);
+	ft_free_map(img);
+	ft_free_data(img);
+	free(img);
+	exit(0);
 }
